@@ -12,22 +12,33 @@ from pathlib import Path
 import pandas as pd
 
 from sec_risk_detector.config import ProjectConfig
-from sec_risk_detector.models import ExtractedSection, Filing
+from sec_risk_detector.models import ExtractedSection
+from sec_risk_detector.nlp_features import RiskChangeAnalyzer
 from sec_risk_detector.sec_client import SecClient
 from sec_risk_detector.section_extractor import RiskSectionExtractor
 
 
 class FilingIngestionPipeline:
-    """Pipeline for ticker lookup, filing metadata, and risk text extraction."""
+    """Pipeline for ticker lookup, filing metadata, risk extraction, and scoring."""
 
     def __init__(
         self,
         client: SecClient | None = None,
         extractor: RiskSectionExtractor | None = None,
+        analyzer: RiskChangeAnalyzer | None = None,
     ) -> None:
+        """Initialize pipeline dependencies.
+
+        Args:
+            client: Optional SEC client. If not provided, one is created from env config.
+            extractor: Optional risk-section extractor.
+            analyzer: Optional NLP risk-change analyzer.
+        """
+
         config = ProjectConfig.from_env()
         self.client = client or SecClient(config)
         self.extractor = extractor or RiskSectionExtractor()
+        self.analyzer = analyzer or RiskChangeAnalyzer()
 
     def get_filing_metadata(
         self,
@@ -50,9 +61,12 @@ class FilingIngestionPipeline:
 
         filings = self.client.get_recent_filings(ticker=ticker, forms=forms, limit=limit)
         sections: list[ExtractedSection] = []
+
         for filing in filings:
             html = self.client.get_text(filing.filing_url)
-            sections.append(self.extractor.extract_from_html(filing, html))
+            section = self.extractor.extract_from_html(filing, html)
+            sections.append(section)
+
         return sections
 
     def extract_risk_sections_df(
@@ -65,6 +79,26 @@ class FilingIngestionPipeline:
 
         sections = self.extract_risk_sections(ticker=ticker, forms=forms, limit=limit)
         return pd.DataFrame([section.to_dict() for section in sections])
+
+    def build_risk_change_scores_df(
+        self,
+        ticker: str,
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 6,
+    ) -> pd.DataFrame:
+        """Extract risk sections and compute risk-change scores between filings.
+
+        The returned DataFrame compares each filing with the immediately previous
+        filing for the same ticker. For example, if 6 filings are extracted,
+        this method returns up to 5 comparison rows.
+        """
+
+        sections_df = self.extract_risk_sections_df(
+            ticker=ticker,
+            forms=forms,
+            limit=limit,
+        )
+        return self.analyzer.compare_dataframe(sections_df)
 
     @staticmethod
     def save_dataframe(df: pd.DataFrame, output_path: str | Path) -> Path:
