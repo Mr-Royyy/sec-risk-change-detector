@@ -44,6 +44,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--compare-mode",
+        choices=["previous", "same-form"],
+        default="previous",
+        help="Risk-score comparison mode. Use 'same-form' to avoid comparing 10-Ks to 10-Qs.",
+    )
+
+    parser.add_argument(
         "--output",
         type=Path,
         default=None,
@@ -51,7 +58,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     return parser
-
 
 def main() -> None:
     """Run the CLI."""
@@ -67,6 +73,7 @@ def main() -> None:
             args.ticker,
             forms=forms,
             limit=args.limit,
+            compare_mode=args.compare_mode,
         )
     elif args.extract_risk:
         df = pipeline.extract_risk_sections_df(

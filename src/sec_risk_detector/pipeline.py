@@ -27,13 +27,7 @@ class FilingIngestionPipeline:
         extractor: RiskSectionExtractor | None = None,
         analyzer: RiskChangeAnalyzer | None = None,
     ) -> None:
-        """Initialize pipeline dependencies.
-
-        Args:
-            client: Optional SEC client. If not provided, one is created from env config.
-            extractor: Optional risk-section extractor.
-            analyzer: Optional NLP risk-change analyzer.
-        """
+        """Initialize pipeline dependencies."""
 
         config = ProjectConfig.from_env()
         self.client = client or SecClient(config)
@@ -85,12 +79,18 @@ class FilingIngestionPipeline:
         ticker: str,
         forms: tuple[str, ...] = ("10-K", "10-Q"),
         limit: int = 6,
+        compare_mode: str = "previous",
     ) -> pd.DataFrame:
         """Extract risk sections and compute risk-change scores between filings.
 
-        The returned DataFrame compares each filing with the immediately previous
-        filing for the same ticker. For example, if 6 filings are extracted,
-        this method returns up to 5 comparison rows.
+        Args:
+            ticker: Company ticker symbol.
+            forms: SEC form types to include.
+            limit: Maximum number of filings to fetch.
+            compare_mode: Either "previous" or "same-form".
+
+        Returns:
+            A DataFrame of risk-change scores.
         """
 
         sections_df = self.extract_risk_sections_df(
@@ -98,7 +98,11 @@ class FilingIngestionPipeline:
             forms=forms,
             limit=limit,
         )
-        return self.analyzer.compare_dataframe(sections_df)
+
+        return self.analyzer.compare_dataframe(
+            sections_df,
+            compare_mode=compare_mode,
+        )
 
     @staticmethod
     def save_dataframe(df: pd.DataFrame, output_path: str | Path) -> Path:
