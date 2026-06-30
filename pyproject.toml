@@ -16,6 +16,7 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.5.0",
+    "scikit-learn>=1.4.0",
 ]
 
 [project.scripts]
@@ -28,3 +29,4 @@ src = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
