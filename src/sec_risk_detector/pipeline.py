@@ -163,6 +163,118 @@ class FilingIngestionPipeline:
 
         return self.summary_analyzer.top_risk_events(event_study_df, n=n)
     
+
+
+    def build_batch_event_study_df(
+        self,
+        tickers: list[str],
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+    ) -> pd.DataFrame:
+        """Build event-study results for multiple tickers.
+
+        Args:
+            tickers: List of company ticker symbols.
+            forms: SEC form types to include.
+            limit: Maximum number of filings per ticker.
+            compare_mode: Either "previous" or "same-form".
+            benchmark_ticker: Benchmark used for abnormal returns.
+
+        Returns:
+            Combined event-study DataFrame across all successful tickers.
+
+        Notes:
+            If one ticker fails, the method continues with the remaining tickers.
+            The error is stored in an error row so the batch run is easier to debug.
+        """
+
+        frames: list[pd.DataFrame] = []
+
+        for ticker in tickers:
+            clean_ticker = ticker.upper().strip()
+
+            if not clean_ticker:
+                continue
+
+            try:
+                ticker_df = self.build_event_study_df(
+                    ticker=clean_ticker,
+                    forms=forms,
+                    limit=limit,
+                    compare_mode=compare_mode,
+                    benchmark_ticker=benchmark_ticker,
+                )
+                frames.append(ticker_df)
+
+            except Exception as exc:  # noqa: BLE001
+                error_df = pd.DataFrame(
+                    [
+                        {
+                            "ticker": clean_ticker,
+                            "error": str(exc),
+                        }
+                    ]
+                )
+                frames.append(error_df)
+
+        if not frames:
+            return pd.DataFrame()
+
+        return pd.concat(frames, ignore_index=True)
+
+    def build_batch_research_summary_df(
+        self,
+        tickers: list[str],
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+    ) -> pd.DataFrame:
+        """Build multi-ticker event-study results and summarize by risk bucket."""
+
+        event_study_df = self.build_batch_event_study_df(
+            tickers=tickers,
+            forms=forms,
+            limit=limit,
+            compare_mode=compare_mode,
+            benchmark_ticker=benchmark_ticker,
+        )
+
+        valid_df = event_study_df.dropna(subset=["final_risk_change_score"], how="any")
+
+        if valid_df.empty:
+            return pd.DataFrame()
+
+        return self.summary_analyzer.summarize(valid_df)
+
+    def build_batch_top_risk_events_df(
+        self,
+        tickers: list[str],
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+        n: int = 10,
+    ) -> pd.DataFrame:
+        """Build multi-ticker event-study results and return top risk events."""
+
+        event_study_df = self.build_batch_event_study_df(
+            tickers=tickers,
+            forms=forms,
+            limit=limit,
+            compare_mode=compare_mode,
+            benchmark_ticker=benchmark_ticker,
+        )
+
+        valid_df = event_study_df.dropna(subset=["final_risk_change_score"], how="any")
+
+        if valid_df.empty:
+            return pd.DataFrame()
+
+        return self.summary_analyzer.top_risk_events(valid_df, n=n)
+    
     @staticmethod
     def save_dataframe(df: pd.DataFrame, output_path: str | Path) -> Path:
         """Save a DataFrame to CSV, creating parent directories as needed."""

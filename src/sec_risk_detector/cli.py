@@ -15,7 +15,19 @@ def build_parser() -> argparse.ArgumentParser:
         description="Fetch SEC filing metadata and optionally analyze risk-factor text."
     )
 
-    parser.add_argument("ticker", help="Ticker symbol, for example AAPL or MSFT.")
+    parser.add_argument(
+        "ticker",
+        nargs="?",
+        default=None,
+        help="Ticker symbol, for example AAPL or MSFT.",
+    )
+
+    parser.add_argument(
+        "--tickers",
+        nargs="+",
+        default=None,
+        help="Optional list of tickers for batch mode, for example: AAPL MSFT NVDA.",
+    )
 
     parser.add_argument(
         "--limit",
@@ -100,47 +112,87 @@ def main() -> None:
     pipeline = FilingIngestionPipeline()
     forms = tuple(args.forms)
 
+    tickers = args.tickers if args.tickers else ([args.ticker] if args.ticker else [])
+
+    if not tickers:
+        parser.error("Please provide either a ticker or --tickers AAPL MSFT NVDA.")
+
+    is_batch = len(tickers) > 1
+
     if args.summary:
-        df = pipeline.build_research_summary_df(
-            args.ticker,
-            forms=forms,
-            limit=args.limit,
-            compare_mode=args.compare_mode,
-            benchmark_ticker=args.benchmark,
-        )
+        if is_batch:
+            df = pipeline.build_batch_research_summary_df(
+                tickers=tickers,
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+            )
+        else:
+            df = pipeline.build_research_summary_df(
+                tickers[0],
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+            )
+
     elif args.top_events:
-        df = pipeline.build_top_risk_events_df(
-            args.ticker,
-            forms=forms,
-            limit=args.limit,
-            compare_mode=args.compare_mode,
-            benchmark_ticker=args.benchmark,
-            n=args.top_n,
-        )
+        if is_batch:
+            df = pipeline.build_batch_top_risk_events_df(
+                tickers=tickers,
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+                n=args.top_n,
+            )
+        else:
+            df = pipeline.build_top_risk_events_df(
+                tickers[0],
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+                n=args.top_n,
+            )
+
     elif args.event_study:
-        df = pipeline.build_event_study_df(
-            args.ticker,
-            forms=forms,
-            limit=args.limit,
-            compare_mode=args.compare_mode,
-            benchmark_ticker=args.benchmark,
-        )
+        if is_batch:
+            df = pipeline.build_batch_event_study_df(
+                tickers=tickers,
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+            )
+        else:
+            df = pipeline.build_event_study_df(
+                tickers[0],
+                forms=forms,
+                limit=args.limit,
+                compare_mode=args.compare_mode,
+                benchmark_ticker=args.benchmark,
+            )
+
     elif args.score_risk:
         df = pipeline.build_risk_change_scores_df(
-            args.ticker,
+            tickers[0],
             forms=forms,
             limit=args.limit,
             compare_mode=args.compare_mode,
         )
+
     elif args.extract_risk:
         df = pipeline.extract_risk_sections_df(
-            args.ticker,
+            tickers[0],
             forms=forms,
             limit=args.limit,
         )
+
     else:
         df = pipeline.get_filing_metadata(
-            args.ticker,
+            tickers[0],
             forms=forms,
             limit=args.limit,
         )
