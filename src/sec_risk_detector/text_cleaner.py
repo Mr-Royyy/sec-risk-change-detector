@@ -6,6 +6,12 @@ import re
 
 from bs4 import BeautifulSoup
 
+import warnings
+
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
 
 class FilingTextCleaner:
     """Convert SEC filing HTML into normalized plain text."""
