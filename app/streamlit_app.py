@@ -74,80 +74,76 @@ class RiskDashboardApp:
         st.markdown("</main>", unsafe_allow_html=True)
 
     def _inject_css(self) -> None:
-        """Inject the editorial design system."""
+        """Inject the institutional research-terminal design system."""
 
         st.markdown(
             """
-
-                        <style>
-                @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap');
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
 
                 :root {
-                    --background: #FAFAF8;
-                    --paper: #FFFFFF;
-                    --paper-soft: #F7F2EA;
-                    --foreground: #151515;
-                    --muted: #3F3A35;
-                    --muted-2: #595149;
-                    --accent: #A97705;
-                    --accent-soft: #C89322;
-                    --border: #D5CABD;
-                    --border-strong: #B8AA98;
-                    --success: #2F7D4E;
-                    --success-soft: #EAF5EE;
-                    --shadow-sm: 0 4px 14px rgba(26, 26, 26, 0.065);
-                    --shadow-md: 0 14px 34px rgba(26, 26, 26, 0.095);
-                    --shadow-lg: 0 28px 78px rgba(26, 26, 26, 0.135);
-                    --radius-sm: 12px;
-                    --radius-md: 18px;
-                    --radius-lg: 28px;
-                    --max: 1640px;
-                    --sidebar: 340px;
+                    --bg: #F3F6FA;
+                    --surface: #FFFFFF;
+                    --surface-subtle: #F8FAFC;
+                    --surface-muted: #EEF2F6;
+                    --surface-sidebar: #0B1220;
+                    --surface-sidebar-soft: #111B2C;
 
-                    --font-label: 1rem;
-                    --font-body: 1.18rem;
-                    --font-body-lg: 1.35rem;
-                    --font-card-title: 1.75rem;
-                    --font-section-title: 2.35rem;
-                    --font-hero: clamp(3rem, 4.05vw, 3.55rem);
+                    --text: #111827;
+                    --heading: #0B1220;
+                    --secondary: #475569;
+                    --tertiary: #64748B;
+
+                    --border: #CBD5E1;
+                    --border-soft: #E2E8F0;
+                    --border-strong: #94A3B8;
+
+                    --primary: #1E3A5F;
+                    --primary-hover: #243B53;
+                    --active: #2563EB;
+                    --risk: #B42318;
+                    --success: #15803D;
+
+                    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+                    --shadow-sm: 0 3px 8px rgba(15, 23, 42, 0.07);
+
+                    --radius-sm: 4px;
+                    --radius-md: 6px;
+                    --radius-lg: 8px;
+
+                    --max: 1680px;
+                    --sidebar: 340px;
+                    --body: 18px;
                 }
 
-                html, body, [class*="css"] {
+                html,
+                body,
+                [class*="css"] {
                     font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-                    color: var(--foreground);
-                    font-size: 18px;
+                    color: var(--text);
+                    font-size: var(--body) !important;
                 }
 
                 .stApp {
-                    background:
-                        radial-gradient(circle at 8% 2%, rgba(169, 119, 5, 0.075), transparent 32rem),
-                        radial-gradient(circle at 90% 5%, rgba(200, 147, 34, 0.07), transparent 32rem),
-                        linear-gradient(180deg, #FAFAF8 0%, #F4EFE7 100%);
-                    color: var(--foreground);
+                    background: var(--bg);
+                    color: var(--text);
                 }
 
                 .stApp::before {
-                    content: "";
-                    position: fixed;
-                    inset: 0;
-                    pointer-events: none;
-                    opacity: 0.18;
-                    background-image: radial-gradient(rgba(26, 26, 26, 0.052) 0.55px, transparent 0.55px);
-                    background-size: 5px 5px;
-                    mix-blend-mode: multiply;
-                    z-index: 0;
+                    content: none;
                 }
 
                 [data-testid="stHeader"] {
-                    background: rgba(250, 250, 248, 0.88);
-                    backdrop-filter: blur(14px);
-                    border-bottom: 1px solid rgba(217, 209, 198, 0.82);
+                    background: rgba(243, 246, 250, 0.96);
+                    backdrop-filter: blur(10px);
+                    border-bottom: 1px solid var(--border);
+                    height: 3.25rem;
                 }
 
                 .block-container {
                     max-width: none !important;
                     width: 100% !important;
-                    padding: 1.75rem 2.75rem 7rem 2.75rem !important;
+                    padding: 0.75rem 1.25rem 5rem 1.25rem !important;
                 }
 
                 .page-shell {
@@ -156,54 +152,52 @@ class RiskDashboardApp:
                     margin: 0 auto;
                 }
 
-                /* Sidebar: make the setup controls readable and touch friendly. */
                 section[data-testid="stSidebar"] {
                     width: var(--sidebar) !important;
                     min-width: var(--sidebar) !important;
-                    background: linear-gradient(180deg, #F2EDE4 0%, #EEE7DC 100%);
-                    border-right: 1px solid var(--border-strong);
-                    box-shadow: 10px 0 32px rgba(26, 26, 26, 0.06);
+                    background: var(--surface-sidebar);
+                    border-right: 1px solid #1E293B;
+                    box-shadow: none;
                 }
 
                 section[data-testid="stSidebar"] > div {
                     width: var(--sidebar) !important;
                     min-width: var(--sidebar) !important;
-                    padding-left: 1.65rem;
-                    padding-right: 1.65rem;
+                    padding-left: 1.35rem !important;
+                    padding-right: 1.35rem !important;
                 }
 
                 [data-testid="stSidebar"] section {
-                    padding-top: 1.75rem;
+                    padding-top: 1.1rem !important;
                 }
 
                 [data-testid="stSidebar"] * {
-                    color: var(--foreground);
+                    color: #E5E7EB !important;
                 }
 
                 [data-testid="stSidebar"] h3 {
-                    font-family: "Playfair Display", Georgia, serif;
-                    font-size: 2.15rem;
-                    font-weight: 650;
-                    margin: 0 0 0.6rem 0;
-                    letter-spacing: -0.02em;
+                    font-size: 2rem !important;
+                    font-weight: 900 !important;
+                    margin: 0 0 0.35rem 0 !important;
+                    color: #FFFFFF !important;
+                    letter-spacing: -0.02em !important;
                 }
 
                 [data-testid="stSidebar"] .stCaptionContainer,
                 [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-                    color: var(--muted) !important;
-                    font-size: 1.05rem !important;
-                    line-height: 1.55;
-                    margin-bottom: 1.5rem;
+                    color: #CBD5E1 !important;
+                    font-size: 1.08rem !important;
+                    line-height: 1.45 !important;
+                    margin-bottom: 1.25rem !important;
                 }
 
                 [data-testid="stSidebar"] label {
-                    font-family: "IBM Plex Mono", monospace;
-                    color: var(--foreground) !important;
-                    font-size: 1rem !important;
-                    font-weight: 700 !important;
-                    letter-spacing: 0.055em;
-                    text-transform: uppercase;
-                    line-height: 1.35 !important;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    color: #F8FAFC !important;
+                    font-size: 1.08rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    text-transform: none !important;
                     margin-bottom: 0.35rem !important;
                 }
 
@@ -212,504 +206,1126 @@ class RiskDashboardApp:
                 [data-testid="stSidebar"] .stSelectbox,
                 [data-testid="stSidebar"] .stRadio,
                 [data-testid="stSidebar"] .stSlider {
-                    margin-bottom: 1.95rem;
-                    padding-bottom: 0.95rem;
-                    border-bottom: 1px solid rgba(217, 209, 198, 0.68);
+                    margin-bottom: 1.2rem !important;
+                    padding-bottom: 1rem !important;
+                    border-bottom: 1px solid rgba(148, 163, 184, 0.28);
                 }
 
                 [data-testid="stSidebar"] input,
                 [data-testid="stSidebar"] textarea,
                 [data-testid="stSidebar"] select,
                 [data-baseweb="select"] > div {
-                    min-height: 56px !important;
-                    font-size: 1.12rem !important;
-                    border-radius: 12px !important;
+                    min-height: 52px !important;
+                    font-size: 1.08rem !important;
+                    border-radius: var(--radius-md) !important;
+                    background: #F8FAFC !important;
+                    border-color: #334155 !important;
+                    color: #0F172A !important;
                 }
 
-                [data-testid="stSidebar"] [role="radiogroup"] label,
-                [data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
-                [data-testid="stSidebar"] [data-baseweb="slider"] {
-                    font-family: "Source Sans 3", system-ui, sans-serif !important;
-                    font-size: 1.1rem !important;
-                    font-weight: 650 !important;
-                    letter-spacing: 0 !important;
-                    text-transform: none !important;
-                    line-height: 1.45 !important;
+                [data-testid="stSidebar"] input::placeholder,
+                [data-testid="stSidebar"] textarea::placeholder {
+                    color: #64748B !important;
                 }
 
-                [data-testid="stSidebar"] .callout {
-                    font-size: 1.08rem;
-                    padding: 1.25rem 1.35rem;
-                    line-height: 1.55;
-                    border-radius: 16px;
-                    border-left: 5px solid var(--accent);
-                    background: rgba(255, 255, 255, 0.82);
+                [data-testid="stSidebar"] [role="radiogroup"] label {
+                    font-size: 1.08rem !important;
+                    font-weight: 700 !important;
+                    color: #E5E7EB !important;
+                }
+
+                [data-testid="stSidebar"] [data-baseweb="slider"] div,
+                [data-testid="stSidebar"] [data-baseweb="slider"] span {
+                    font-size: 1rem !important;
+                    color: #E5E7EB !important;
                 }
 
                 h1, h2, h3, h4 {
-                    font-family: "Playfair Display", Georgia, serif;
-                    color: var(--foreground);
-                    letter-spacing: -0.025em;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    color: var(--heading) !important;
+                    letter-spacing: -0.02em !important;
                 }
 
-                p, li, .stMarkdown, [data-testid="stMarkdownContainer"] {
-                    color: var(--muted);
-                    line-height: 1.7;
-                    font-size: var(--font-body);
+                p, li {
+                    color: var(--secondary) !important;
+                    line-height: 1.55 !important;
+                    font-size: 1.12rem !important;
                 }
 
-                /* Top hero: intentionally taller and more readable. */
-                .hero {
-                    display: grid;
-                    grid-template-columns: minmax(0, 7.6fr) minmax(360px, 4.4fr);
-                    gap: 2.25rem;
-                    align-items: stretch;
-                    background: rgba(255, 255, 255, 0.74);
-                    border: 1px solid var(--border-strong);
-                    border-top: 5px solid var(--foreground);
+                .terminal-header {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
                     border-radius: var(--radius-lg);
-                    padding: 3.25rem;
-                    margin: 0.65rem 0 2.75rem 0;
-                    box-shadow: var(--shadow-md);
+                    box-shadow: var(--shadow-xs);
+                    margin: 0 0 1.25rem 0;
+                    overflow: hidden;
                 }
 
-                .hero-main {
-                    min-height: 520px;
+                .terminal-topbar {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                }
-
-                .label-row {
-                    display: flex;
+                    justify-content: space-between;
                     align-items: center;
-                    gap: 1.15rem;
-                    margin-bottom: 1.55rem;
+                    gap: 1rem;
+                    padding: 0.8rem 1.15rem;
+                    background: #EAF0F7;
+                    border-bottom: 1px solid var(--border);
                 }
 
-                .label-line {
-                    width: 5.5rem;
-                    height: 2px;
-                    background: var(--accent);
+                .terminal-label {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.55rem;
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 1.02rem;
+                    font-weight: 800;
+                    letter-spacing: 0.035em;
+                    text-transform: uppercase;
+                    color: var(--primary);
                 }
 
-                .small-caps {
+                .terminal-label::before {
+                    content: "";
+                    display: inline-block;
+                    width: 0.65rem;
+                    height: 0.65rem;
+                    background: var(--primary);
+                    border-radius: 2px;
+                }
+
+                .terminal-timestamp {
                     font-family: "IBM Plex Mono", monospace;
                     font-size: 1rem;
-                    font-weight: 700;
-                    letter-spacing: 0.075em;
-                    text-transform: uppercase;
-                    color: var(--accent);
-                    line-height: 1.35;
-                }
-
-                .hero-title {
-                    font-family: "Playfair Display", Georgia, serif;
-                    font-size: var(--font-hero);
-                    font-weight: 700;
-                    line-height: 1.03;
-                    letter-spacing: -0.045em;
-                    margin: 0;
-                    color: var(--foreground);
-                    max-width: 980px;
-                }
-
-                .hero-title em {
-                    color: var(--accent);
-                    font-style: italic;
+                    color: var(--secondary);
                     font-weight: 600;
                 }
 
-                .hero-copy {
-                    max-width: 980px;
-                    margin: 1.65rem 0 0 0;
-                    font-size: clamp(1.35rem, 1.65vw, 1.55rem);
-                    line-height: 1.62;
-                    color: var(--muted);
+                .terminal-body {
+                    display: grid;
+                    grid-template-columns: minmax(0, 8fr) minmax(380px, 4fr);
+                    gap: 1.25rem;
+                    padding: 1.25rem;
+                    align-items: stretch;
                 }
 
-                .hero-actions {
+                .terminal-main {
+                    align-self: center;
+                }
+
+                .terminal-title {
+                    font-size: clamp(3.1rem, 4vw, 4rem) !important;
+                    line-height: 1 !important;
+                    font-weight: 900 !important;
+                    margin: 0 !important;
+                    color: var(--heading) !important;
+                    max-width: 1040px;
+                }
+
+                .terminal-title em {
+                    font-style: normal;
+                    color: var(--heading);
+                }
+
+                .terminal-copy {
+                    max-width: 1120px;
+                    margin: 0.85rem 0 0 0;
+                    font-size: 1.35rem !important;
+                    line-height: 1.42 !important;
+                    color: var(--secondary) !important;
+                }
+
+                .workflow-strip {
                     display: grid;
                     grid-template-columns: repeat(3, minmax(0, 1fr));
-                    gap: 1.6rem;
-                    margin-top: 2.35rem;
-                    width: 100%;
-                    max-width: 100%;
-                }
-
-                .hero-action-card {
-                    background: var(--paper);
+                    gap: 0;
+                    margin-top: 1.05rem;
                     border: 1px solid var(--border);
-                    border-top: 4px solid var(--accent);
                     border-radius: var(--radius-md);
-                    padding: 2rem;
-                    box-shadow: var(--shadow-sm);
-                    min-height: 210px;
+                    overflow: hidden;
+                    background: var(--surface-subtle);
                 }
 
-                .hero-action-title {
-                    font-weight: 800;
-                    color: var(--foreground);
-                    font-size: 1.45rem;
-                    line-height: 1.2;
-                    margin-bottom: 0.8rem;
+                .workflow-step {
+                    padding: 1rem 1.05rem;
+                    border-right: 1px solid var(--border);
+                    min-height: 116px;
                 }
 
-                .hero-action-copy {
-                    color: var(--muted);
-                    font-size: 1.16rem;
-                    line-height: 1.55;
+                .workflow-step:last-child {
+                    border-right: 0;
                 }
 
-                .hero-panel {
-                    align-self: stretch;
-                    background: var(--paper);
+                .workflow-title {
+                    color: var(--heading);
+                    font-size: 1.35rem;
+                    font-weight: 900;
+                    margin-bottom: 0.25rem;
+                }
+
+                .workflow-copy {
+                    color: var(--secondary);
+                    font-size: 1.08rem;
+                    line-height: 1.35;
+                    font-weight: 500;
+                }
+
+                .study-panel {
+                    background: var(--surface-subtle);
                     border: 1px solid var(--border-strong);
-                    border-top: 5px solid var(--accent);
                     border-radius: var(--radius-lg);
-                    padding: 2.15rem;
-                    box-shadow: var(--shadow-lg);
+                    padding: 1rem;
+                    align-self: stretch;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                 }
 
-                .hero-panel-title {
-                    font-family: "Playfair Display", Georgia, serif;
-                    font-size: 2.55rem;
-                    line-height: 1.08;
-                    margin: 0 0 1.45rem 0;
-                    color: var(--foreground);
+                .study-panel-title {
+                    font-size: 1.55rem;
+                    font-weight: 900;
+                    color: var(--heading);
+                    margin: 0 0 0.7rem 0;
                 }
 
-                .meta-list {
+                .study-table {
                     display: grid;
+                    border: 1px solid var(--border);
+                    background: var(--surface);
+                    border-radius: var(--radius-md);
+                    overflow: hidden;
+                }
+
+                .study-row {
+                    display: grid;
+                    grid-template-columns: 0.45fr 0.55fr;
+                    align-items: center;
                     gap: 1rem;
+                    padding: 0.7rem 0.85rem;
+                    border-bottom: 1px solid var(--border-soft);
+                    font-size: 1.02rem;
+                    min-height: 46px;
                 }
 
-                .meta-item {
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 1.25rem;
-                    border-bottom: 1px solid var(--border);
-                    padding-bottom: 1rem;
-                    font-size: 1.15rem;
-                    line-height: 1.35;
+                .study-row:last-child {
+                    border-bottom: 0;
                 }
 
-                .meta-item span:first-child {
-                    color: var(--muted);
-                    font-weight: 650;
+                .study-row span:first-child {
+                    color: var(--secondary);
+                    font-weight: 800;
                 }
 
-                .meta-item span:last-child {
-                    font-weight: 850;
-                    color: var(--foreground);
+                .study-row span:last-child {
+                    color: var(--heading);
+                    font-weight: 900;
                     text-align: right;
+                    word-break: break-word;
                 }
 
-                /* Output preview modules: 2x2 by default so text can be large. */
-                .preview-grid {
+                .module-grid {
                     display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 1.75rem;
-                    margin: 0 0 3.1rem 0;
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                    gap: 1rem;
+                    margin: 0 0 1.25rem 0;
                 }
 
-                .preview-card {
-                    background: var(--paper);
+                .report-module {
+                    background: var(--surface);
                     border: 1px solid var(--border);
-                    border-top: 4px solid var(--accent);
                     border-radius: var(--radius-lg);
-                    padding: 2.15rem;
-                    min-height: 255px;
-                    box-shadow: var(--shadow-md);
+                    padding: 1.3rem;
+                    min-height: 170px;
+                    box-shadow: none;
                 }
 
-                .preview-number {
+                .module-label {
                     font-family: "IBM Plex Mono", monospace;
-                    color: var(--accent);
+                    color: var(--tertiary);
                     font-size: 1rem;
-                    letter-spacing: 0.075em;
+                    letter-spacing: 0.035em;
                     text-transform: uppercase;
-                    margin-bottom: 1rem;
-                    font-weight: 700;
+                    margin-bottom: 0.55rem;
+                    font-weight: 800;
                 }
 
-                .preview-title {
-                    font-family: "Playfair Display", Georgia, serif;
-                    font-size: 2rem;
-                    line-height: 1.16;
-                    color: var(--foreground);
-                    margin-bottom: 0.9rem;
+                .module-title {
+                    font-size: 1.7rem;
+                    font-weight: 900;
+                    line-height: 1.1;
+                    color: var(--heading);
+                    margin-bottom: 0.35rem;
                 }
 
-                .preview-copy {
-                    font-size: 1.22rem;
-                    line-height: 1.58;
-                    color: var(--muted);
+                .module-copy {
+                    font-size: 1.1rem;
+                    line-height: 1.4;
+                    color: var(--secondary);
+                    font-weight: 500;
                 }
 
-                .section-card {
-                    background: var(--paper);
+                .report-section-header {
+                    background: var(--surface);
                     border: 1px solid var(--border);
-                    border-top: 4px solid var(--accent);
                     border-radius: var(--radius-lg);
-                    padding: 2.75rem 3rem;
-                    box-shadow: var(--shadow-md);
-                    margin: 2.5rem 0 2rem 0;
+                    padding: 1.25rem 1.4rem;
+                    box-shadow: none;
+                    margin: 1.1rem 0 0.85rem 0;
+                }
+
+                .section-kicker {
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 1rem;
+                    font-weight: 800;
+                    letter-spacing: 0.035em;
+                    text-transform: uppercase;
+                    color: var(--primary);
+                    margin-bottom: 0.25rem;
                 }
 
                 .section-title {
-                    font-family: "Playfair Display", Georgia, serif;
-                    font-size: clamp(2rem, 2.45vw, 2.65rem);
-                    line-height: 1.12;
-                    margin: 0.6rem 0 1rem 0;
-                    color: var(--foreground);
-                    max-width: 1120px;
+                    font-size: clamp(2.25rem, 2.9vw, 3rem) !important;
+                    font-weight: 900 !important;
+                    line-height: 1.08 !important;
+                    margin: 0 0 0.45rem 0 !important;
+                    color: var(--heading) !important;
+                    max-width: 1180px;
                 }
 
                 .section-copy {
-                    max-width: 1080px;
+                    max-width: 1220px;
                     margin: 0;
-                    color: var(--muted);
-                    font-size: 1.24rem;
-                    line-height: 1.65;
+                    color: var(--secondary);
+                    font-size: 1.25rem !important;
+                    line-height: 1.42 !important;
+                    font-weight: 500;
                 }
 
                 .metric-card {
-                    background: var(--paper);
+                    background: var(--surface);
                     border: 1px solid var(--border);
                     border-radius: var(--radius-lg);
-                    padding: 2.25rem;
-                    box-shadow: var(--shadow-md);
-                    min-height: 255px;
+                    padding: 1.3rem;
+                    box-shadow: none;
+                    min-height: 168px;
                 }
 
                 .metric-card.gold {
-                    border-top: 4px solid var(--accent);
+                    border-top: 0;
                 }
 
                 .metric-label {
                     font-family: "IBM Plex Mono", monospace;
-                    margin: 0 0 1.1rem 0;
-                    color: var(--accent);
+                    margin: 0 0 0.65rem 0;
+                    color: var(--tertiary);
                     font-size: 1rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.075em;
-                    font-weight: 700;
-                    line-height: 1.35;
+                    letter-spacing: 0.035em;
+                    font-weight: 800;
                 }
 
                 .metric-value {
-                    font-family: "Playfair Display", Georgia, serif;
                     margin: 0;
-                    color: var(--foreground);
-                    font-size: 3.25rem;
-                    font-weight: 700;
+                    color: var(--heading);
+                    font-size: 2.65rem;
+                    font-weight: 900;
                     line-height: 1;
-                    letter-spacing: -0.035em;
+                    letter-spacing: -0.02em;
                 }
 
                 .metric-caption {
-                    margin: 1.1rem 0 0 0;
-                    color: var(--muted);
-                    font-size: 1.18rem;
-                    line-height: 1.55;
+                    margin: 0.7rem 0 0 0;
+                    color: var(--secondary);
+                    font-size: 1.12rem;
+                    line-height: 1.4;
+                    font-weight: 500;
                 }
 
-                .empty-state {
+                .analysis-prep-grid {
                     display: grid;
-                    grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
-                    gap: 1.75rem;
+                    grid-template-columns: minmax(0, 7fr) minmax(360px, 5fr);
+                    gap: 1rem;
                     align-items: stretch;
-                    margin: 2rem 0 2.5rem 0;
+                    margin: 1rem 0 1.2rem 0;
                 }
 
-                .empty-panel {
-                    background: var(--paper);
+                .analysis-note {
+                    background: var(--surface);
                     border: 1px solid var(--border);
                     border-radius: var(--radius-lg);
-                    padding: 2.25rem;
-                    box-shadow: var(--shadow-md);
-                    min-height: 230px;
+                    padding: 1.3rem;
+                    box-shadow: none;
+                    min-height: 142px;
                 }
 
-                .empty-panel h3 {
-                    font-size: 2.05rem;
-                    margin: 0.45rem 0 0.95rem 0;
-                    line-height: 1.16;
+                .analysis-note h3 {
+                    font-size: 1.75rem !important;
+                    font-weight: 900 !important;
+                    margin: 0.25rem 0 0.4rem 0 !important;
+                    line-height: 1.12 !important;
+                    color: var(--heading) !important;
                 }
 
-                .empty-panel p {
+                .analysis-note p {
                     margin: 0;
-                    font-size: 1.2rem;
-                    line-height: 1.62;
-                    color: var(--muted);
+                    font-size: 1.15rem !important;
+                    line-height: 1.42 !important;
+                    color: var(--secondary) !important;
+                    font-weight: 500;
                 }
 
                 .event-card {
-                    background: var(--paper);
+                    background: var(--surface);
                     border: 1px solid var(--border);
-                    border-top: 4px solid var(--accent);
                     border-radius: var(--radius-lg);
-                    padding: 2.15rem;
+                    padding: 1.2rem;
                     height: 100%;
-                    box-shadow: var(--shadow-md);
+                    box-shadow: none;
                 }
 
                 .event-title {
-                    font-family: "Playfair Display", Georgia, serif;
-                    color: var(--foreground);
-                    font-size: 2rem;
-                    line-height: 1.18;
-                    margin-bottom: 0.65rem;
+                    color: var(--heading);
+                    font-size: 1.55rem;
+                    font-weight: 900;
+                    line-height: 1.15;
+                    margin-bottom: 0.25rem;
                 }
 
                 .event-subtitle {
-                    color: var(--muted);
-                    font-size: 1.16rem;
-                    margin-bottom: 1.1rem;
+                    color: var(--secondary);
+                    font-size: 1.08rem;
+                    margin-bottom: 0.75rem;
+                    font-weight: 600;
                 }
 
                 .event-score {
                     display: inline-flex;
-                    border-radius: 999px;
-                    padding: 0.55rem 0.9rem;
-                    background: rgba(169, 119, 5, 0.10);
-                    border: 1px solid rgba(169, 119, 5, 0.24);
-                    color: var(--accent);
+                    border-radius: var(--radius-sm);
+                    padding: 0.38rem 0.6rem;
+                    background: #EEF2F6;
+                    border: 1px solid var(--border);
+                    color: var(--primary);
                     font-family: "IBM Plex Mono", monospace;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    letter-spacing: 0.045em;
+                    font-size: 0.95rem;
+                    font-weight: 800;
+                    letter-spacing: 0.02em;
                     text-transform: uppercase;
                 }
 
                 .callout {
-                    border-left: 5px solid var(--accent);
-                    background: rgba(255, 255, 255, 0.84);
-                    padding: 1.35rem 1.45rem;
-                    color: var(--muted);
-                    margin: 1.25rem 0;
-                    font-size: 1.16rem;
-                    line-height: 1.58;
-                    border-radius: 0 16px 16px 0;
-                    box-shadow: var(--shadow-sm);
+                    border: 1px solid #334155;
+                    background: var(--surface-sidebar-soft);
+                    padding: 1rem 1.05rem;
+                    color: #E5E7EB !important;
+                    margin: 1rem 0;
+                    font-size: 1.05rem;
+                    line-height: 1.45;
+                    border-radius: var(--radius-md);
+                    box-shadow: none;
+                }
+
+                .callout strong {
+                    color: #FFFFFF !important;
                 }
 
                 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
-                    gap: 1rem;
+                    gap: 0;
+                    border: 1px solid var(--border);
                     border-bottom: 1px solid var(--border);
-                    padding-bottom: 1rem;
-                    margin: 1.75rem 0 2.25rem 0;
+                    padding-bottom: 0;
+                    margin: 1.25rem 0 1.2rem 0;
                     align-items: center;
-                    flex-wrap: wrap;
+                    background: var(--surface);
+                    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+                    overflow-x: auto;
                 }
 
                 div[data-testid="stTabs"] button,
                 button[data-baseweb="tab"] {
                     font-family: "Source Sans 3", system-ui, sans-serif !important;
-                    color: var(--muted) !important;
-                    font-size: 1.22rem !important;
-                    font-weight: 850 !important;
-                    letter-spacing: 0.005em !important;
+                    color: var(--secondary) !important;
+                    font-size: 1.28rem !important;
+                    font-weight: 900 !important;
+                    letter-spacing: 0 !important;
                     text-transform: none !important;
-                    padding: 1.25rem 1.6rem !important;
-                    border-radius: 999px !important;
-                    border: 1px solid transparent !important;
-                    min-height: 64px !important;
+                    padding: 1rem 1.45rem !important;
+                    border-radius: 0 !important;
+                    border: 0 !important;
+                    border-right: 1px solid var(--border) !important;
+                    border-bottom: 5px solid transparent !important;
+                    background: transparent !important;
+                    min-height: 68px !important;
                 }
 
                 div[data-testid="stTabs"] button[aria-selected="true"],
                 button[data-baseweb="tab"][aria-selected="true"] {
-                    color: var(--foreground) !important;
-                    background: rgba(169, 119, 5, 0.15) !important;
-                    border: 2px solid rgba(169, 119, 5, 0.36) !important;
-                    box-shadow: var(--shadow-sm);
+                    color: var(--heading) !important;
+                    background: #F8FAFC !important;
+                    border-bottom: 5px solid var(--active) !important;
+                    box-shadow: none;
                 }
 
                 .stButton > button,
                 .stDownloadButton > button {
-                    min-height: 64px;
-                    border-radius: 14px;
-                    border: 1px solid var(--accent);
-                    background: var(--accent);
-                    color: white;
-                    font-family: "Source Sans 3", system-ui, sans-serif;
-                    font-size: 1.2rem;
-                    font-weight: 900;
-                    letter-spacing: 0.01em;
-                    box-shadow: var(--shadow-md);
-                    transition: all 180ms ease-out;
+                    min-height: 60px !important;
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--primary) !important;
+                    background: var(--primary) !important;
+                    color: white !important;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    font-size: 1.18rem !important;
+                    font-weight: 900 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: var(--shadow-xs) !important;
+                    transition: background 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
                 }
 
                 .stButton > button:hover,
                 .stDownloadButton > button:hover {
-                    background: var(--accent-soft);
-                    border-color: var(--accent-soft);
-                    color: white;
-                    box-shadow: var(--shadow-lg);
-                    transform: translateY(-1px);
+                    background: var(--primary-hover) !important;
+                    border-color: var(--primary-hover) !important;
+                    color: white !important;
+                    box-shadow: var(--shadow-sm) !important;
+                    transform: none !important;
+                }
+
+                .stDownloadButton > button {
+                    background: #FFFFFF !important;
+                    color: var(--primary) !important;
+                    border-color: var(--border-strong) !important;
+                }
+
+                .stDownloadButton > button:hover {
+                    background: #F8FAFC !important;
+                    color: var(--primary) !important;
+                    border-color: var(--primary-hover) !important;
                 }
 
                 [data-testid="stDataFrame"] {
-                    border: 1px solid var(--border);
-                    border-radius: var(--radius-md);
-                    overflow: hidden;
-                    box-shadow: var(--shadow-sm);
-                    font-size: 1.05rem;
+                    border: 1px solid var(--border) !important;
+                    border-radius: var(--radius-md) !important;
+                    overflow: hidden !important;
+                    box-shadow: none !important;
+                    font-size: 1rem !important;
+                    background: var(--surface) !important;
+                }
+
+                [data-testid="stDataFrame"] * {
+                    font-size: 1rem !important;
+                }
+
+                [data-testid="stDataFrame"] [role="columnheader"],
+                [data-testid="stDataFrame"] [data-testid="stDataFrameResizable"] {
+                    font-size: 1.05rem !important;
+                    font-weight: 800 !important;
                 }
 
                 [data-testid="stStatusWidget"] {
-                    border-radius: var(--radius-lg);
-                    border: 1px solid var(--border);
-                    background: var(--paper);
-                    box-shadow: var(--shadow-md);
-                    font-size: 1.1rem;
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--border) !important;
+                    background: var(--surface) !important;
+                    box-shadow: none !important;
+                    font-size: 1.05rem !important;
                 }
 
-                .stAlert {
-                    font-size: 1.12rem;
+                [data-testid="stStatusWidget"] * {
+                    font-size: 1.05rem !important;
+                }
+
+                [data-testid="stAlert"] {
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--border) !important;
+                    background: #F8FAFC !important;
+                    font-size: 1.05rem !important;
                 }
 
                 input, textarea, select {
-                    border-radius: 12px !important;
+                    border-radius: var(--radius-sm) !important;
+                }
+
+                a {
+                    color: var(--primary-hover);
+                }
+
+                code {
+                    background: #EEF2F6 !important;
+                    color: var(--heading) !important;
+                    border: 1px solid var(--border);
+                    border-radius: 4px;
+                    padding: 0.08rem 0.25rem;
+                    font-size: 0.95em !important;
+                }
+
+
+                .table-toolbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: end;
+                    gap: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+                    padding: 1.15rem 1.25rem;
+                    margin-top: 1.25rem;
+                    border-bottom: 0;
+                }
+
+                .table-title {
+                    font-size: 2rem !important;
+                    font-weight: 900 !important;
+                    margin: 0 0 0.2rem 0 !important;
+                    color: var(--heading) !important;
+                }
+
+                .table-caption {
                     font-size: 1.1rem !important;
+                    color: var(--secondary) !important;
+                    margin: 0 !important;
+                    font-weight: 600;
                 }
 
-                @media (max-width: 1500px) {
-                    .hero {
-                        grid-template-columns: minmax(0, 1fr);
+                div[data-testid="stVerticalBlock"] > div:has([data-testid="stDataFrame"]) {
+                    margin-top: 0 !important;
+                }
+
+                @media (max-width: 1350px) {
+                    .terminal-body {
+                        grid-template-columns: 1fr;
                     }
 
-                    .hero-panel {
-                        max-width: none;
+                    .module-grid {
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                    }
+
+                    .workflow-strip {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .workflow-step {
+                        border-right: 0;
+                        border-bottom: 1px solid var(--border);
+                    }
+
+                    .workflow-step:last-child {
+                        border-bottom: 0;
                     }
                 }
 
-                @media (max-width: 1200px) {
+                @media (max-width: 1100px) {
                     .block-container {
-                        padding: 1.2rem 1.2rem 5rem 1.2rem !important;
+                        padding: 1rem 1rem 4rem 1rem !important;
                     }
 
-                    .preview-grid,
-                    .empty-state {
+                    .analysis-prep-grid {
                         grid-template-columns: 1fr;
                     }
 
-                    .hero-actions {
+                    .module-grid {
                         grid-template-columns: 1fr;
-                    }
-
-                    .hero {
-                        padding: 2.25rem;
                     }
                 }
-            </style>
+
+
+                /* ---------------------------------------------------------
+                   Final polish pass: sidebar contrast + primary actions
+                   --------------------------------------------------------- */
+
+                /* Sidebar: keep the dark analyst-control-panel direction, but
+                   ensure every label, helper, selected value, and disabled state
+                   remains readable. */
+                [data-testid="stSidebar"] {
+                    background: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] * {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] h1,
+                [data-testid="stSidebar"] h2,
+                [data-testid="stSidebar"] h3,
+                [data-testid="stSidebar"] h4,
+                [data-testid="stSidebar"] label {
+                    color: #F8FAFC !important;
+                }
+
+                [data-testid="stSidebar"] .stCaptionContainer,
+                [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+                [data-testid="stSidebar"] small,
+                [data-testid="stSidebar"] p {
+                    color: #CBD5E1 !important;
+                    font-size: 1.02rem !important;
+                    line-height: 1.45 !important;
+                }
+
+                /* Light form controls inside the dark sidebar. This fixes the
+                   unreadable select/dropdown state such as the same-form value. */
+                [data-testid="stSidebar"] input,
+                [data-testid="stSidebar"] textarea,
+                [data-testid="stSidebar"] select,
+                [data-testid="stSidebar"] [data-baseweb="select"],
+                [data-testid="stSidebar"] [data-baseweb="select"] > div,
+                [data-testid="stSidebar"] [data-baseweb="input"],
+                [data-testid="stSidebar"] [data-baseweb="base-input"],
+                [data-testid="stSidebar"] [data-baseweb="textarea"] {
+                    background: #F8FAFC !important;
+                    border-color: #94A3B8 !important;
+                    color: #0B1220 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] input *,
+                [data-testid="stSidebar"] textarea *,
+                [data-testid="stSidebar"] select *,
+                [data-testid="stSidebar"] [data-baseweb="select"] *,
+                [data-testid="stSidebar"] [data-baseweb="input"] *,
+                [data-testid="stSidebar"] [data-baseweb="base-input"] *,
+                [data-testid="stSidebar"] [data-baseweb="textarea"] * {
+                    color: #0B1220 !important;
+                    opacity: 1 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] input::placeholder,
+                [data-testid="stSidebar"] textarea::placeholder {
+                    color: #475569 !important;
+                    opacity: 1 !important;
+                    -webkit-text-fill-color: #475569 !important;
+                }
+
+                [data-testid="stSidebar"] [aria-disabled="true"],
+                [data-testid="stSidebar"] [disabled],
+                [data-testid="stSidebar"] [aria-disabled="true"] *,
+                [data-testid="stSidebar"] [disabled] * {
+                    opacity: 1 !important;
+                    color: #0B1220 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] [role="radiogroup"] label,
+                [data-testid="stSidebar"] [data-baseweb="radio"] *,
+                [data-testid="stSidebar"] [data-baseweb="slider"] div,
+                [data-testid="stSidebar"] [data-baseweb="slider"] span {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                    font-size: 1.05rem !important;
+                }
+
+                /* Sidebar recommendation note. */
+                [data-testid="stSidebar"] .callout {
+                    background: #111B2C !important;
+                    border: 1px solid #334155 !important;
+                    border-left: 4px solid #5B7FA6 !important;
+                    color: #E5EDF7 !important;
+                    font-size: 1.02rem !important;
+                    line-height: 1.5 !important;
+                    padding: 1rem 1.05rem !important;
+                    border-radius: var(--radius-md) !important;
+                }
+
+                [data-testid="stSidebar"] .callout,
+                [data-testid="stSidebar"] .callout * {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .callout strong {
+                    color: #FFFFFF !important;
+                    font-weight: 900 !important;
+                }
+
+                [data-testid="stSidebar"] .callout code {
+                    display: inline-block;
+                    background: #E5EDF7 !important;
+                    color: #0B1220 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                    border: 1px solid #94A3B8 !important;
+                    border-radius: 5px !important;
+                    padding: 0.12rem 0.35rem !important;
+                    font-size: 0.95em !important;
+                    font-weight: 800 !important;
+                    line-height: 1.2 !important;
+                }
+
+                /* Primary analysis actions: keep the button in its strong
+                   institutional navy state at rest. Hover/focus should preserve
+                   the same readable treatment instead of flipping into a bright
+                   Streamlit-blue state. */
+                .stButton > button {
+                    min-height: 56px !important;
+                    padding: 0.78rem 1.25rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #3B5F84 !important;
+                    background: #0F2742 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: 1.12rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    cursor: pointer !important;
+                    width: 100% !important;
+                }
+
+                .stButton > button *,
+                .stButton > button p,
+                .stButton > button span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: 1.12rem !important;
+                    font-weight: 800 !important;
+                }
+
+                .stButton > button:hover,
+                .stButton > button:focus,
+                .stButton > button:active {
+                    background: #0F2742 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    transform: none !important;
+                    cursor: pointer !important;
+                }
+
+                .stButton > button:hover *,
+                .stButton > button:focus *,
+                .stButton > button:active *,
+                .stButton > button:hover p,
+                .stButton > button:focus p,
+                .stButton > button:active p,
+                .stButton > button:hover span,
+                .stButton > button:focus span,
+                .stButton > button:active span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                }
+
+                /* Keep CSV downloads secondary and readable instead of treating
+                   them like primary analysis actions. */
+                .stDownloadButton > button {
+                    min-height: 52px !important;
+                    padding: 0.7rem 1.1rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #94A3B8 !important;
+                    background: #FFFFFF !important;
+                    color: #1E3A5F !important;
+                    -webkit-text-fill-color: #1E3A5F !important;
+                    font-size: 1.02rem !important;
+                    font-weight: 800 !important;
+                    cursor: pointer !important;
+                }
+
+                .stDownloadButton > button *,
+                .stDownloadButton > button p,
+                .stDownloadButton > button span {
+                    color: #1E3A5F !important;
+                    -webkit-text-fill-color: #1E3A5F !important;
+                }
+
+                .stDownloadButton > button:hover,
+                .stDownloadButton > button:focus,
+                .stDownloadButton > button:active {
+                    background: #F8FAFC !important;
+                    border-color: #1E3A5F !important;
+                    color: #1E3A5F !important;
+                    -webkit-text-fill-color: #1E3A5F !important;
+                    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.10) !important;
+                }
+
+                .stDownloadButton > button:hover *,
+                .stDownloadButton > button:focus *,
+                .stDownloadButton > button:active * {
+                    color: #1E3A5F !important;
+                    -webkit-text-fill-color: #1E3A5F !important;
+                }
+
+            
+
+                /* ---------------------------------------------------------
+                   Final button color update: all Streamlit action/export
+                   buttons stay dark institutional blue at rest.
+                   --------------------------------------------------------- */
+                .stButton > button,
+                .stDownloadButton > button,
+                div[data-testid="stFormSubmitButton"] > button {
+                    min-height: 58px !important;
+                    padding: 0.78rem 1.25rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    font-size: 1.08rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    cursor: pointer !important;
+                    opacity: 1 !important;
+                    transition: background 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out !important;
+                }
+
+                .stButton > button *,
+                .stButton > button p,
+                .stButton > button span,
+                .stDownloadButton > button *,
+                .stDownloadButton > button p,
+                .stDownloadButton > button span,
+                div[data-testid="stFormSubmitButton"] > button *,
+                div[data-testid="stFormSubmitButton"] > button p,
+                div[data-testid="stFormSubmitButton"] > button span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: 1.08rem !important;
+                    font-weight: 800 !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:hover,
+                .stButton > button:focus,
+                .stButton > button:active,
+                .stDownloadButton > button:hover,
+                .stDownloadButton > button:focus,
+                .stDownloadButton > button:active,
+                div[data-testid="stFormSubmitButton"] > button:hover,
+                div[data-testid="stFormSubmitButton"] > button:focus,
+                div[data-testid="stFormSubmitButton"] > button:active {
+                    background: #0B1F33 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.22) !important;
+                    transform: none !important;
+                    cursor: pointer !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:hover *,
+                .stButton > button:focus *,
+                .stButton > button:active *,
+                .stButton > button:hover p,
+                .stButton > button:focus p,
+                .stButton > button:active p,
+                .stButton > button:hover span,
+                .stButton > button:focus span,
+                .stButton > button:active span,
+                .stDownloadButton > button:hover *,
+                .stDownloadButton > button:focus *,
+                .stDownloadButton > button:active *,
+                .stDownloadButton > button:hover p,
+                .stDownloadButton > button:focus p,
+                .stDownloadButton > button:active p,
+                .stDownloadButton > button:hover span,
+                .stDownloadButton > button:focus span,
+                .stDownloadButton > button:active span,
+                div[data-testid="stFormSubmitButton"] > button:hover *,
+                div[data-testid="stFormSubmitButton"] > button:focus *,
+                div[data-testid="stFormSubmitButton"] > button:active * {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:disabled,
+                .stDownloadButton > button:disabled,
+                div[data-testid="stFormSubmitButton"] > button:disabled,
+                .stButton > button[disabled],
+                .stDownloadButton > button[disabled],
+                div[data-testid="stFormSubmitButton"] > button[disabled] {
+                    background: #294C73 !important;
+                    border-color: #294C73 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 0.72 !important;
+                    cursor: not-allowed !important;
+                }
+
+
+                /* =========================================================
+                   FINAL BUTTON OVERRIDE — permanent dark navy buttons
+                   This is intentionally the last button rule in the file.
+                   It targets Streamlit's real rendered button elements,
+                   including secondary/download buttons that often look clear
+                   unless overridden directly.
+                   ========================================================= */
+
+                div[data-testid="stButton"] button,
+                div[data-testid="stDownloadButton"] button,
+                div[data-testid="stFormSubmitButton"] button,
+                .stButton button,
+                .stDownloadButton button,
+                button[data-testid^="baseButton"]:not([role="tab"]),
+                button[data-testid^="stBaseButton"]:not([role="tab"]),
+                button[kind="primary"]:not([role="tab"]),
+                button[kind="secondary"]:not([role="tab"]),
+                button[kind="tertiary"]:not([role="tab"]) {
+                    appearance: none !important;
+                    -webkit-appearance: none !important;
+                    min-height: 58px !important;
+                    padding: 0.82rem 1.45rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    background-color: #0F2742 !important;
+                    background-image: none !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+                    font-size: 1.08rem !important;
+                    font-weight: 800 !important;
+                    line-height: 1.15 !important;
+                    letter-spacing: 0 !important;
+                    text-align: center !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.20) !important;
+                    opacity: 1 !important;
+                    cursor: pointer !important;
+                    transition: background-color 140ms ease-out, border-color 140ms ease-out, box-shadow 140ms ease-out !important;
+                }
+
+                div[data-testid="stButton"] button *,
+                div[data-testid="stButton"] button p,
+                div[data-testid="stButton"] button span,
+                div[data-testid="stDownloadButton"] button *,
+                div[data-testid="stDownloadButton"] button p,
+                div[data-testid="stDownloadButton"] button span,
+                div[data-testid="stFormSubmitButton"] button *,
+                div[data-testid="stFormSubmitButton"] button p,
+                div[data-testid="stFormSubmitButton"] button span,
+                .stButton button *,
+                .stButton button p,
+                .stButton button span,
+                .stDownloadButton button *,
+                .stDownloadButton button p,
+                .stDownloadButton button span,
+                button[data-testid^="baseButton"]:not([role="tab"]) *,
+                button[data-testid^="baseButton"]:not([role="tab"]) p,
+                button[data-testid^="baseButton"]:not([role="tab"]) span,
+                button[data-testid^="stBaseButton"]:not([role="tab"]) *,
+                button[data-testid^="stBaseButton"]:not([role="tab"]) p,
+                button[data-testid^="stBaseButton"]:not([role="tab"]) span,
+                button[kind="primary"]:not([role="tab"]) *,
+                button[kind="secondary"]:not([role="tab"]) *,
+                button[kind="tertiary"]:not([role="tab"]) * {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: 1.08rem !important;
+                    font-weight: 800 !important;
+                    line-height: 1.15 !important;
+                    text-decoration: none !important;
+                    opacity: 1 !important;
+                }
+
+                div[data-testid="stButton"] button:hover,
+                div[data-testid="stButton"] button:focus,
+                div[data-testid="stButton"] button:focus-visible,
+                div[data-testid="stButton"] button:active,
+                div[data-testid="stDownloadButton"] button:hover,
+                div[data-testid="stDownloadButton"] button:focus,
+                div[data-testid="stDownloadButton"] button:focus-visible,
+                div[data-testid="stDownloadButton"] button:active,
+                div[data-testid="stFormSubmitButton"] button:hover,
+                div[data-testid="stFormSubmitButton"] button:focus,
+                div[data-testid="stFormSubmitButton"] button:focus-visible,
+                div[data-testid="stFormSubmitButton"] button:active,
+                .stButton button:hover,
+                .stButton button:focus,
+                .stButton button:focus-visible,
+                .stButton button:active,
+                .stDownloadButton button:hover,
+                .stDownloadButton button:focus,
+                .stDownloadButton button:focus-visible,
+                .stDownloadButton button:active,
+                button[data-testid^="baseButton"]:not([role="tab"]):hover,
+                button[data-testid^="baseButton"]:not([role="tab"]):focus,
+                button[data-testid^="baseButton"]:not([role="tab"]):focus-visible,
+                button[data-testid^="baseButton"]:not([role="tab"]):active,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):hover,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):focus,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):focus-visible,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):active,
+                button[kind="primary"]:not([role="tab"]):hover,
+                button[kind="primary"]:not([role="tab"]):focus,
+                button[kind="primary"]:not([role="tab"]):active,
+                button[kind="secondary"]:not([role="tab"]):hover,
+                button[kind="secondary"]:not([role="tab"]):focus,
+                button[kind="secondary"]:not([role="tab"]):active,
+                button[kind="tertiary"]:not([role="tab"]):hover,
+                button[kind="tertiary"]:not([role="tab"]):focus,
+                button[kind="tertiary"]:not([role="tab"]):active {
+                    background: #162C46 !important;
+                    background-color: #162C46 !important;
+                    background-image: none !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.24) !important;
+                    outline: none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    cursor: pointer !important;
+                }
+
+                div[data-testid="stButton"] button:hover *,
+                div[data-testid="stButton"] button:focus *,
+                div[data-testid="stButton"] button:active *,
+                div[data-testid="stDownloadButton"] button:hover *,
+                div[data-testid="stDownloadButton"] button:focus *,
+                div[data-testid="stDownloadButton"] button:active *,
+                div[data-testid="stFormSubmitButton"] button:hover *,
+                div[data-testid="stFormSubmitButton"] button:focus *,
+                div[data-testid="stFormSubmitButton"] button:active *,
+                .stButton button:hover *,
+                .stButton button:focus *,
+                .stButton button:active *,
+                .stDownloadButton button:hover *,
+                .stDownloadButton button:focus *,
+                .stDownloadButton button:active *,
+                button[data-testid^="baseButton"]:not([role="tab"]):hover *,
+                button[data-testid^="baseButton"]:not([role="tab"]):focus *,
+                button[data-testid^="baseButton"]:not([role="tab"]):active *,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):hover *,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):focus *,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):active *,
+                button[kind="primary"]:not([role="tab"]):hover *,
+                button[kind="primary"]:not([role="tab"]):focus *,
+                button[kind="primary"]:not([role="tab"]):active *,
+                button[kind="secondary"]:not([role="tab"]):hover *,
+                button[kind="secondary"]:not([role="tab"]):focus *,
+                button[kind="secondary"]:not([role="tab"]):active *,
+                button[kind="tertiary"]:not([role="tab"]):hover *,
+                button[kind="tertiary"]:not([role="tab"]):focus *,
+                button[kind="tertiary"]:not([role="tab"]):active * {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 1 !important;
+                }
+
+                div[data-testid="stButton"] button:disabled,
+                div[data-testid="stDownloadButton"] button:disabled,
+                div[data-testid="stFormSubmitButton"] button:disabled,
+                .stButton button:disabled,
+                .stDownloadButton button:disabled,
+                button[data-testid^="baseButton"]:not([role="tab"]):disabled,
+                button[data-testid^="stBaseButton"]:not([role="tab"]):disabled,
+                button[kind="primary"]:not([role="tab"]):disabled,
+                button[kind="secondary"]:not([role="tab"]):disabled,
+                button[kind="tertiary"]:not([role="tab"]):disabled {
+                    background: #294C73 !important;
+                    background-color: #294C73 !important;
+                    background-image: none !important;
+                    border-color: #3B5F84 !important;
+                    color: rgba(255, 255, 255, 0.88) !important;
+                    -webkit-text-fill-color: rgba(255, 255, 255, 0.88) !important;
+                    opacity: 1 !important;
+                    cursor: not-allowed !important;
+                }
+
+</style>
             """,
             unsafe_allow_html=True,
         )
+
 
     def _sidebar_controls(self) -> dict[str, object]:
         """Render sidebar controls and return selected values."""
@@ -788,6 +1404,7 @@ class RiskDashboardApp:
             "top_n": top_n,
         }
 
+
     def _render_hero(self, controls: dict[str, object]) -> None:
         """Render the hero section."""
 
@@ -800,91 +1417,98 @@ class RiskDashboardApp:
 
         st.markdown(
             f"""
-            <section class="hero">
-                <div class="hero-main">
-                    <div class="label-row">
-                        <span class="label-line"></span>
-                        <span class="small-caps">SEC Filing Risk Analysis</span>
-                    </div>
-                    <h1 class="hero-title">Analyze SEC risk disclosures and <em>test market reactions.</em></h1>
-                    <p class="hero-copy">
-                        A research terminal for measuring how corporate risk language changes, then checking
-                        whether those changes line up with post-filing returns, volatility, and abnormal returns.
-                    </p>
-                    <div class="hero-actions">
-                        <div class="hero-action-card">
-                            <div class="hero-action-title">1. Choose a universe</div>
-                            <div class="hero-action-copy">Start with one ticker or run a small cross-company study.</div>
-                        </div>
-                        <div class="hero-action-card">
-                            <div class="hero-action-title">2. Run a study</div>
-                            <div class="hero-action-copy">Score disclosure changes and connect them to market outcomes.</div>
-                        </div>
-                        <div class="hero-action-card">
-                            <div class="hero-action-title">3. Read the evidence</div>
-                            <div class="hero-action-copy">Inspect score buckets, top events, and abnormal returns.</div>
-                        </div>
-                    </div>
+            <section class="terminal-header">
+                <div class="terminal-topbar">
+                    <span class="terminal-label">SEC Filing Risk Analysis</span>
+                    <span class="terminal-timestamp">Internal research workbench · disclosure signal / market reaction</span>
                 </div>
-                <aside class="hero-panel">
-                    <h2 class="hero-panel-title">Current study</h2>
-                    <div class="meta-list">
-                        <div class="meta-item"><span>Mode</span><span>{escape(mode)}</span></div>
-                        <div class="meta-item"><span>Universe</span><span>{escape(universe_label)}</span></div>
-                        <div class="meta-item"><span>Filings</span><span>{limit} per ticker</span></div>
-                        <div class="meta-item"><span>Comparison</span><span>{escape(compare_mode)}</span></div>
-                        <div class="meta-item"><span>Benchmark</span><span>{escape(benchmark)}</span></div>
+                <div class="terminal-body">
+                    <div class="terminal-main">
+                        <h1 class="terminal-title">Analyze SEC risk disclosures and test market reactions.</h1>
+                        <p class="terminal-copy">
+                            Internal research tool for measuring changes in corporate risk language and checking
+                            whether those changes line up with post-filing returns, volatility, and abnormal returns.
+                        </p>
+                        <div class="workflow-strip">
+                            <div class="workflow-step">
+                                <div class="workflow-title">1. Configure study</div>
+                                <div class="workflow-copy">Select ticker universe, filing depth, comparison mode, and benchmark.</div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="workflow-title">2. Run analysis</div>
+                                <div class="workflow-copy">Extract disclosures, score risk-language changes, and run event-study metrics.</div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="workflow-title">3. Review report</div>
+                                <div class="workflow-copy">Inspect signal strength, market reaction evidence, top events, and exportable tables.</div>
+                            </div>
+                        </div>
                     </div>
-                </aside>
+                    <aside class="study-panel">
+                        <h2 class="study-panel-title">Current study</h2>
+                        <div class="study-table">
+                            <div class="study-row"><span>Mode</span><span>{escape(mode)}</span></div>
+                            <div class="study-row"><span>Universe</span><span>{escape(universe_label)}</span></div>
+                            <div class="study-row"><span>Filings</span><span>{limit} per ticker</span></div>
+                            <div class="study-row"><span>Comparison</span><span>{escape(compare_mode)}</span></div>
+                            <div class="study-row"><span>Benchmark</span><span>{escape(benchmark)}</span></div>
+                        </div>
+                    </aside>
+                </div>
             </section>
             """,
             unsafe_allow_html=True,
         )
+
+
 
     def _render_result_preview(self) -> None:
         """Render immediate value preview before the user clicks anything."""
 
         st.markdown(
             """
-            <div class="preview-grid">
-                <div class="preview-card">
-                    <div class="preview-number">Output 01</div>
-                    <div class="preview-title">Risk-change score</div>
-                    <div class="preview-copy">A bounded score showing how much risk-factor language changed versus a prior filing.</div>
+            <div class="module-grid">
+                <div class="report-module">
+                    <div class="module-label">Output 01</div>
+                    <div class="module-title">Risk-change score</div>
+                    <div class="module-copy">Bounded measure of how much Item 1A risk-factor language changed versus the selected prior filing.</div>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-number">Output 02</div>
-                    <div class="preview-title">Top changed terms</div>
-                    <div class="preview-copy">A readable list of added and removed risk themes for qualitative inspection.</div>
+                <div class="report-module">
+                    <div class="module-label">Output 02</div>
+                    <div class="module-title">Changed risk terms</div>
+                    <div class="module-copy">Added and removed disclosure themes for qualitative review, model inspection, and report evidence.</div>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-number">Output 03</div>
-                    <div class="preview-title">Market reaction</div>
-                    <div class="preview-copy">Post-filing returns, realized volatility, benchmark returns, and abnormal returns.</div>
+                <div class="report-module">
+                    <div class="module-label">Output 03</div>
+                    <div class="module-title">Market reaction</div>
+                    <div class="module-copy">Post-filing returns, realized volatility, benchmark returns, and abnormal returns.</div>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-number">Output 04</div>
-                    <div class="preview-title">Research evidence</div>
-                    <div class="preview-copy">Low, medium, and high disclosure-change buckets for quick interpretation.</div>
+                <div class="report-module">
+                    <div class="module-label">Output 04</div>
+                    <div class="module-title">Research evidence</div>
+                    <div class="module-copy">Low, medium, and high disclosure-change buckets for report-level interpretation.</div>
                 </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
+
+
 
     def _section_header(self, label: str, title: str, copy: str) -> None:
         """Render a reusable editorial section header."""
 
         st.markdown(
             f"""
-            <div class="section-card">
-                <div class="small-caps">{escape(label)}</div>
+            <div class="report-section-header">
+                <div class="section-kicker">{escape(label)}</div>
                 <h2 class="section-title">{escape(title)}</h2>
                 <p class="section-copy">{escape(copy)}</p>
             </div>
             """,
             unsafe_allow_html=True,
         )
+
 
     def _render_overview_tab(self, controls: dict[str, object]) -> None:
         """Render overview and quick analysis metrics."""
@@ -909,7 +1533,11 @@ class RiskDashboardApp:
             "Best first run: AAPL, 8 filings, same-form comparison.",
         )
 
-        if st.button("Run full risk analysis", use_container_width=True):
+        _, action_col, _ = st.columns([1, 0.5, 1])
+        with action_col:
+            full_analysis_clicked = st.button("Run full risk analysis", use_container_width=True)
+
+        if full_analysis_clicked:
             with st.status("Running full research workflow...", expanded=True) as status:
                 st.write("Fetching SEC filings and extracting risk sections...")
                 st.write("Scoring disclosure-language changes...")
@@ -948,7 +1576,11 @@ class RiskDashboardApp:
             "Use this tab when you want to inspect the text signal itself.",
         )
 
-        if st.button("Calculate risk signal", use_container_width=True):
+        _, action_col, _ = st.columns([1, 0.5, 1])
+        with action_col:
+            risk_signal_clicked = st.button("Calculate risk signal", use_container_width=True)
+
+        if risk_signal_clicked:
             with st.status(f"Scoring risk disclosures for {ticker}...", expanded=True) as status:
                 st.write("Downloading recent filings...")
                 st.write("Extracting Item 1A risk sections...")
@@ -984,7 +1616,11 @@ class RiskDashboardApp:
         )
 
         button_label = "Run batch event study" if len(controls["tickers"]) > 1 else "Run event study"
-        if st.button(button_label, use_container_width=True):
+        _, action_col, _ = st.columns([1, 0.5, 1])
+        with action_col:
+            event_study_clicked = st.button(button_label, use_container_width=True)
+
+        if event_study_clicked:
             with st.status("Running event study...", expanded=True) as status:
                 st.write("Building risk-change scores...")
                 st.write("Downloading market and benchmark prices...")
@@ -1024,7 +1660,11 @@ class RiskDashboardApp:
             "This is the easiest table to explain in a portfolio walkthrough.",
         )
 
-        if st.button("Build research summary", use_container_width=True):
+        _, action_col, _ = st.columns([1, 0.5, 1])
+        with action_col:
+            summary_clicked = st.button("Build research summary", use_container_width=True)
+
+        if summary_clicked:
             with st.status("Building risk-bucket summary...", expanded=True) as status:
                 st.write("Running event study inputs...")
                 st.write("Sorting filings into low, medium, and high disclosure-change buckets...")
@@ -1064,7 +1704,11 @@ class RiskDashboardApp:
             "Use this tab when you want concrete examples instead of aggregate statistics.",
         )
 
-        if st.button("Find top risk-change events", use_container_width=True):
+        _, action_col, _ = st.columns([1, 0.5, 1])
+        with action_col:
+            top_events_clicked = st.button("Find top risk-change events", use_container_width=True)
+
+        if top_events_clicked:
             with st.status("Ranking top disclosure-change events...", expanded=True) as status:
                 st.write("Building event-study table...")
                 st.write("Sorting filings by final risk-change score...")
@@ -1118,25 +1762,28 @@ class RiskDashboardApp:
                 """
             )
 
+
     def _empty_state(self, title: str, body: str, note: str) -> None:
         """Render a useful empty state before the user runs an analysis."""
 
         st.markdown(
             f"""
-            <div class="empty-state">
-                <div class="empty-panel">
-                    <div class="small-caps">Before you run it</div>
+            <div class="analysis-prep-grid">
+                <div class="analysis-note">
+                    <div class="section-kicker">Before running analysis</div>
                     <h3>{escape(title)}</h3>
                     <p>{escape(body)}</p>
                 </div>
-                <div class="empty-panel">
-                    <div class="small-caps">Manager note</div>
+                <div class="analysis-note">
+                    <div class="section-kicker">Analyst note</div>
                     <p>{escape(note)}</p>
                 </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
+
+
 
     def _get_event_study_any(self, controls: dict[str, object]) -> pd.DataFrame:
         """Return single-ticker or batch event-study results."""
@@ -1311,6 +1958,7 @@ class RiskDashboardApp:
         tickers = [token.upper().strip() for token in normalized.split(" ") if token.strip()]
         return list(dict.fromkeys(tickers))
 
+
     def _display_dataframe_with_download(self, df: pd.DataFrame, file_name: str) -> None:
         """Display a DataFrame and provide a CSV download button."""
 
@@ -1319,7 +1967,29 @@ class RiskDashboardApp:
             return
 
         display_df = self._round_numeric(df)
-        st.dataframe(display_df, use_container_width=True, height=min(650, 180 + 38 * max(len(display_df), 1)))
+        row_count = len(display_df)
+        column_count = len(display_df.columns)
+
+        st.markdown(
+            f"""
+            <div class="table-toolbar">
+                <div>
+                    <div class="section-kicker">Report table</div>
+                    <h2 class="table-title">Analysis output</h2>
+                    <p class="table-caption">
+                        {row_count} rows · {column_count} columns · export file: {escape(file_name)}
+                    </p>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.dataframe(
+            display_df,
+            use_container_width=True,
+            height=min(620, 160 + 48 * max(len(display_df), 1)),
+        )
 
         csv_bytes = df.to_csv(index=False).encode("utf-8")
         st.download_button(
@@ -1327,9 +1997,11 @@ class RiskDashboardApp:
             data=csv_bytes,
             file_name=file_name,
             mime="text/csv",
-            use_container_width=True,
+            use_container_width=False,
             key=f"download_{file_name}_{len(df)}_{len(df.columns)}",
         )
+
+
 
     @staticmethod
     def _valid_event_rows(df: pd.DataFrame) -> pd.DataFrame:
