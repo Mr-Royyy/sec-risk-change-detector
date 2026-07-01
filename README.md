@@ -6,7 +6,7 @@ The project combines SEC filing ingestion, NLP-based risk-change scoring, and ev
 
 ## Live Demo
 
-Launch the app: **[PASTE_YOUR_STREAMLIT_LINK_HERE](https://sec-risk-change-detector-zgqrfhtup9h6qzd6iwc3ga.streamlit.app/)**
+Launch the app: **[Launch](https://sec-risk-change-detector-zgqrfhtup9h6qzd6iwc3ga.streamlit.app/)**
 
 ## What This Project Does
 
