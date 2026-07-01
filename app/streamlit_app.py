@@ -89,6 +89,7 @@ class RiskDashboardApp:
                         <style>
                 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
 
+<<<<<<< HEAD
                 .stApp {
                     --bg:#F3F6FA; --surface:#FFFFFF; --subtle:#F8FAFC; --sidebar:#0B1220; --sidebar-soft:#111B2C;
                     --text:#111827; --heading:#0B1220; --secondary:#475569; --tertiary:#64748B;
@@ -166,6 +167,1129 @@ class RiskDashboardApp:
 
                 @media(max-width:1350px){.terminal-body{grid-template-columns:1fr}.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-strip{grid-template-columns:1fr}.workflow-step{border-right:0;border-bottom:1px solid var(--border)}.workflow-step:last-child{border-bottom:0}}
                 @media(max-width:1100px){.block-container{padding:.9rem .9rem 3.5rem!important}.analysis-prep-grid{grid-template-columns:1fr}.module-grid{grid-template-columns:1fr}}
+=======
+                :root {
+                    --bg: #F3F6FA;
+                    --surface: #FFFFFF;
+                    --surface-subtle: #F8FAFC;
+                    --surface-muted: #EEF2F6;
+                    --surface-sidebar: #0B1220;
+                    --surface-sidebar-soft: #111B2C;
+
+                    --text: #111827;
+                    --heading: #0B1220;
+                    --secondary: #475569;
+                    --tertiary: #64748B;
+
+                    --border: #CBD5E1;
+                    --border-soft: #E2E8F0;
+                    --border-strong: #94A3B8;
+
+                    --primary: #1E3A5F;
+                    --primary-hover: #243B53;
+                    --active: #2563EB;
+                    --risk: #B42318;
+                    --success: #15803D;
+
+                    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+                    --shadow-sm: 0 3px 8px rgba(15, 23, 42, 0.07);
+
+                    --radius-sm: 4px;
+                    --radius-md: 6px;
+                    --radius-lg: 8px;
+
+                    --max: 1580px;
+                    --sidebar: 280px;
+                    --body: 16px;
+                }
+
+                .stApp,
+                .page-shell {
+                    font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                    color: var(--text);
+                    font-size: var(--body) !important;
+                }
+
+                .stApp {
+                    background: var(--bg);
+                    color: var(--text);
+                }
+
+                .stApp::before {
+                    content: none;
+                }
+
+                header button,
+                [data-testid="stToolbar"] button,
+                [data-testid="stDecoration"] button {
+                    all: revert;
+                }
+
+                .block-container {
+                    max-width: none !important;
+                    
+                    padding: 1.15rem 1.5rem 4rem 1.5rem !important;
+                }
+
+                .page-shell {
+                    width: min(100%, var(--max));
+                    max-width: var(--max);
+                    margin: 0 auto;
+                }
+
+                section[data-testid="stSidebar"] {
+                    width: var(--sidebar) !important;
+                    min-width: var(--sidebar) !important;
+                    background: var(--surface-sidebar);
+                    border-right: 1px solid #1E293B;
+                    box-shadow: none;
+                }
+
+                section[data-testid="stSidebar"] > div {
+                    width: var(--sidebar) !important;
+                    min-width: var(--sidebar) !important;
+                    padding-left: 1rem !important;
+                    padding-right: 1rem !important;
+                }
+
+                [data-testid="stSidebar"] section {
+                    padding-top: 1.1rem !important;
+                }
+
+                [data-testid="stSidebar"] * {
+                    color: #E5E7EB !important;
+                }
+
+                [data-testid="stSidebar"] h3 {
+                    font-size: 1.45rem !important;
+                    font-weight: 900 !important;
+                    margin: 0 0 0.35rem 0 !important;
+                    color: #FFFFFF !important;
+                    letter-spacing: -0.02em !important;
+                }
+
+                [data-testid="stSidebar"] .stCaptionContainer,
+                [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+                    color: #CBD5E1 !important;
+                    font-size: 0.92rem !important;
+                    line-height: 1.45 !important;
+                    margin-bottom: 1.25rem !important;
+                }
+
+                [data-testid="stSidebar"] label {
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    color: #F8FAFC !important;
+                    font-size: 0.92rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    text-transform: none !important;
+                    margin-bottom: 0.35rem !important;
+                }
+
+                [data-testid="stSidebar"] .stTextInput,
+                [data-testid="stSidebar"] .stTextArea,
+                [data-testid="stSidebar"] .stSelectbox,
+                [data-testid="stSidebar"] .stRadio,
+                [data-testid="stSidebar"] .stSlider {
+                    margin-bottom: 1.2rem !important;
+                    padding-bottom: 1rem !important;
+                    border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+                }
+
+                [data-testid="stSidebar"] input,
+                [data-testid="stSidebar"] textarea,
+                [data-testid="stSidebar"] select,
+                [data-baseweb="select"] > div {
+                    min-height: 42px !important;
+                    font-size: 0.92rem !important;
+                    border-radius: var(--radius-md) !important;
+                    background: #F8FAFC !important;
+                    border-color: #334155 !important;
+                    color: #0F172A !important;
+                }
+
+                [data-testid="stSidebar"] input::placeholder,
+                [data-testid="stSidebar"] textarea::placeholder {
+                    color: #64748B !important;
+                }
+
+                [data-testid="stSidebar"] [role="radiogroup"] label {
+                    font-size: 0.92rem !important;
+                    font-weight: 700 !important;
+                    color: #E5E7EB !important;
+                }
+
+                [data-testid="stSidebar"] [data-baseweb="slider"] div,
+                [data-testid="stSidebar"] [data-baseweb="slider"] span {
+                    font-size: 0.9rem !important;
+                    color: #E5E7EB !important;
+                }
+
+                .page-shell h1, .page-shell h2, .page-shell h3, .page-shell h4 {
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    color: var(--heading) !important;
+                    letter-spacing: -0.02em !important;
+                }
+
+                .page-shell p, .page-shell li {
+                    color: var(--secondary) !important;
+                    line-height: 1.55 !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                }
+
+                .terminal-header {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    box-shadow: var(--shadow-xs);
+                    margin: 0 0 1.25rem 0;
+                    overflow: hidden;
+                }
+
+                .terminal-topbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 0.8rem 1.15rem;
+                    background: #EAF0F7;
+                    border-bottom: 1px solid var(--border);
+                }
+
+                .terminal-label {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.55rem;
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 0.9rem;
+                    font-weight: 800;
+                    letter-spacing: 0.035em;
+                    text-transform: uppercase;
+                    color: var(--primary);
+                }
+
+                .terminal-label::before {
+                    content: "";
+                    display: inline-block;
+                    width: 0.65rem;
+                    height: 0.65rem;
+                    background: var(--primary);
+                    border-radius: 2px;
+                }
+
+                .terminal-timestamp {
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 0.9rem;
+                    color: var(--secondary);
+                    font-weight: 600;
+                }
+
+                .terminal-body {
+                    display: grid;
+                    grid-template-columns: minmax(0, 8fr) minmax(320px, 4fr);
+                    gap: 1.25rem;
+                    padding: 1rem;
+                    align-items: stretch;
+                }
+
+                .terminal-main {
+                    align-self: center;
+                }
+
+                .terminal-title {
+                    font-size: clamp(30px, 2.5vw, 46px) !important;
+                    line-height: 1 !important;
+                    font-weight: 900 !important;
+                    margin: 0 !important;
+                    color: var(--heading) !important;
+                    max-width: 1040px;
+                }
+
+                .terminal-title em {
+                    font-style: normal;
+                    color: var(--heading);
+                }
+
+                .terminal-copy {
+                    max-width: 1120px;
+                    margin: 0.85rem 0 0 0;
+                    font-size: clamp(15px, 0.95vw, 17px) !important;
+                    line-height: 1.42 !important;
+                    color: var(--secondary) !important;
+                }
+
+                .workflow-strip {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 0;
+                    margin-top: 1.05rem;
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-md);
+                    overflow: hidden;
+                    background: var(--surface-subtle);
+                }
+
+                .workflow-step {
+                    padding: 0.85rem 0.9rem;
+                    border-right: 1px solid var(--border);
+                    min-height: 96px;
+                }
+
+                .workflow-step:last-child {
+                    border-right: 0;
+                }
+
+                .workflow-title {
+                    color: var(--heading);
+                    font-size: clamp(17px, 1.05vw, 21px);
+                    font-weight: 900;
+                    margin-bottom: 0.25rem;
+                }
+
+                .workflow-copy {
+                    color: var(--secondary);
+                    font-size: clamp(14px, 0.85vw, 16px);
+                    line-height: 1.35;
+                    font-weight: 500;
+                }
+
+                .study-panel {
+                    background: var(--surface-subtle);
+                    border: 1px solid var(--border-strong);
+                    border-radius: var(--radius-lg);
+                    padding: 1rem;
+                    align-self: stretch;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .study-panel-title {
+                    font-size: clamp(20px, 1.25vw, 24px);
+                    font-weight: 900;
+                    color: var(--heading);
+                    margin: 0 0 0.7rem 0;
+                }
+
+                .study-table {
+                    display: grid;
+                    border: 1px solid var(--border);
+                    background: var(--surface);
+                    border-radius: var(--radius-md);
+                    overflow: hidden;
+                }
+
+                .study-row {
+                    display: grid;
+                    grid-template-columns: 0.45fr 0.55fr;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 0.7rem 0.85rem;
+                    border-bottom: 1px solid var(--border-soft);
+                    font-size: 0.9rem;
+                    min-height: 46px;
+                }
+
+                .study-row:last-child {
+                    border-bottom: 0;
+                }
+
+                .study-row span:first-child {
+                    color: var(--secondary);
+                    font-weight: 800;
+                }
+
+                .study-row span:last-child {
+                    color: var(--heading);
+                    font-weight: 900;
+                    text-align: right;
+                    word-break: break-word;
+                }
+
+                .module-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                    gap: 1rem;
+                    margin: 0 0 1.25rem 0;
+                }
+
+                .report-module {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    padding: 1rem;
+                    min-height: 145px;
+                    box-shadow: none;
+                }
+
+                .module-label {
+                    font-family: "IBM Plex Mono", monospace;
+                    color: var(--tertiary);
+                    font-size: 0.9rem;
+                    letter-spacing: 0.035em;
+                    text-transform: uppercase;
+                    margin-bottom: 0.55rem;
+                    font-weight: 800;
+                }
+
+                .module-title {
+                    font-size: clamp(18px, 1.15vw, 22px);
+                    font-weight: 900;
+                    line-height: 1.1;
+                    color: var(--heading);
+                    margin-bottom: 0.35rem;
+                }
+
+                .module-copy {
+                    font-size: 1.1rem;
+                    line-height: 1.4;
+                    color: var(--secondary);
+                    font-weight: 500;
+                }
+
+                .report-section-header {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    padding: 1rem 1.15rem;
+                    box-shadow: none;
+                    margin: 1.1rem 0 0.85rem 0;
+                }
+
+                .section-kicker {
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 0.9rem;
+                    font-weight: 800;
+                    letter-spacing: 0.035em;
+                    text-transform: uppercase;
+                    color: var(--primary);
+                    margin-bottom: 0.25rem;
+                }
+
+                .section-title {
+                    font-size: clamp(24px, 1.8vw, 34px) !important;
+                    font-weight: 900 !important;
+                    line-height: 1.08 !important;
+                    margin: 0 0 0.45rem 0 !important;
+                    color: var(--heading) !important;
+                    max-width: 1180px;
+                }
+
+                .section-copy {
+                    max-width: 1220px;
+                    margin: 0;
+                    color: var(--secondary);
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    line-height: 1.42 !important;
+                    font-weight: 500;
+                }
+
+                .metric-card {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    padding: 1rem;
+                    box-shadow: none;
+                    min-height: 138px;
+                }
+
+                .metric-card.gold {
+                    border-top: 0;
+                }
+
+                .metric-label {
+                    font-family: "IBM Plex Mono", monospace;
+                    margin: 0 0 0.65rem 0;
+                    color: var(--tertiary);
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.035em;
+                    font-weight: 800;
+                }
+
+                .metric-value {
+                    margin: 0;
+                    color: var(--heading);
+                    font-size: clamp(26px, 2vw, 38px);
+                    font-weight: 900;
+                    line-height: 1;
+                    letter-spacing: -0.02em;
+                }
+
+                .metric-caption {
+                    margin: 0.7rem 0 0 0;
+                    color: var(--secondary);
+                    font-size: clamp(14px, 0.85vw, 16px);
+                    line-height: 1.4;
+                    font-weight: 500;
+                }
+
+                .analysis-prep-grid {
+                    display: grid;
+                    grid-template-columns: minmax(0, 7fr) minmax(360px, 5fr);
+                    gap: 1rem;
+                    align-items: stretch;
+                    margin: 1rem 0 1.2rem 0;
+                }
+
+                .analysis-note {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    padding: 1rem;
+                    box-shadow: none;
+                    min-height: 118px;
+                }
+
+                .analysis-note h3 {
+                    font-size: clamp(18px, 1.15vw, 22px) !important;
+                    font-weight: 900 !important;
+                    margin: 0.25rem 0 0.4rem 0 !important;
+                    line-height: 1.12 !important;
+                    color: var(--heading) !important;
+                }
+
+                .analysis-note p {
+                    margin: 0;
+                    font-size: clamp(14px, 0.85vw, 16px) !important;
+                    line-height: 1.42 !important;
+                    color: var(--secondary) !important;
+                    font-weight: 500;
+                }
+
+                .event-card {
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg);
+                    padding: 1.2rem;
+                    height: 100%;
+                    box-shadow: none;
+                }
+
+                .event-title {
+                    color: var(--heading);
+                    font-size: clamp(20px, 1.25vw, 24px);
+                    font-weight: 900;
+                    line-height: 1.15;
+                    margin-bottom: 0.25rem;
+                }
+
+                .event-subtitle {
+                    color: var(--secondary);
+                    font-size: clamp(14px, 0.85vw, 16px);
+                    margin-bottom: 0.75rem;
+                    font-weight: 600;
+                }
+
+                .event-score {
+                    display: inline-flex;
+                    border-radius: var(--radius-sm);
+                    padding: 0.38rem 0.6rem;
+                    background: #EEF2F6;
+                    border: 1px solid var(--border);
+                    color: var(--primary);
+                    font-family: "IBM Plex Mono", monospace;
+                    font-size: 0.95rem;
+                    font-weight: 800;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                }
+
+                .callout {
+                    border: 1px solid #334155;
+                    background: var(--surface-sidebar-soft);
+                    padding: 0.85rem 0.9rem;
+                    color: #E5E7EB !important;
+                    margin: 1rem 0;
+                    font-size: 1.05rem;
+                    line-height: 1.45;
+                    border-radius: var(--radius-md);
+                    box-shadow: none;
+                }
+
+                .callout strong {
+                    color: #FFFFFF !important;
+                }
+
+                div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+                    gap: 0;
+                    border: 1px solid var(--border);
+                    border-bottom: 1px solid var(--border);
+                    padding-bottom: 0;
+                    margin: 1.25rem 0 1.2rem 0;
+                    align-items: center;
+                    background: var(--surface);
+                    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+                    overflow-x: auto;
+                }
+
+                div[data-testid="stTabs"] button,
+                button[data-baseweb="tab"] {
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    color: var(--secondary) !important;
+                    font-size: clamp(15px, 0.95vw, 17px) !important;
+                    font-weight: 900 !important;
+                    letter-spacing: 0 !important;
+                    text-transform: none !important;
+                    padding: 1rem 1.45rem !important;
+                    border-radius: 0 !important;
+                    border: 0 !important;
+                    border-right: 1px solid var(--border) !important;
+                    border-bottom: 5px solid transparent !important;
+                    background: transparent !important;
+                    min-height: 52px !important;
+                }
+
+                div[data-testid="stTabs"] button[aria-selected="true"],
+                button[data-baseweb="tab"][aria-selected="true"] {
+                    color: var(--heading) !important;
+                    background: #F8FAFC !important;
+                    border-bottom: 5px solid var(--active) !important;
+                    box-shadow: none;
+                }
+
+                .stButton > button,
+                .stDownloadButton > button {
+                    min-height: 46px !important;
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--primary) !important;
+                    background: var(--primary) !important;
+                    color: white !important;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    font-weight: 900 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: var(--shadow-xs) !important;
+                    transition: background 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
+                }
+
+                .stButton > button:hover,
+                .stDownloadButton > button:hover {
+                    background: var(--primary-hover) !important;
+                    border-color: var(--primary-hover) !important;
+                    color: white !important;
+                    box-shadow: var(--shadow-sm) !important;
+                    transform: none !important;
+                }
+
+                .stDownloadButton > button {
+                    background: #FFFFFF !important;
+                    color: var(--primary) !important;
+                    border-color: var(--border-strong) !important;
+                }
+
+                .stDownloadButton > button:hover {
+                    background: #F8FAFC !important;
+                    color: var(--primary) !important;
+                    border-color: var(--primary-hover) !important;
+                }
+
+                [data-testid="stDataFrame"] {
+                    border: 1px solid var(--border) !important;
+                    border-radius: var(--radius-md) !important;
+                    overflow: hidden !important;
+                    box-shadow: none !important;
+                    font-size: 0.9rem !important;
+                    background: var(--surface) !important;
+                }
+
+                [data-testid="stDataFrame"] * {
+                    font-size: 0.9rem !important;
+                }
+
+                [data-testid="stDataFrame"] [role="columnheader"],
+                [data-testid="stDataFrame"] [data-testid="stDataFrameResizable"] {
+                    font-size: 0.9rem !important;
+                    font-weight: 800 !important;
+                }
+
+                [data-testid="stStatusWidget"] {
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--border) !important;
+                    background: var(--surface) !important;
+                    box-shadow: none !important;
+                    font-size: 0.9rem !important;
+                }
+
+                [data-testid="stStatusWidget"] * {
+                    font-size: 0.9rem !important;
+                }
+
+                [data-testid="stAlert"] {
+                    border-radius: var(--radius-md) !important;
+                    border: 1px solid var(--border) !important;
+                    background: #F8FAFC !important;
+                    font-size: 0.9rem !important;
+                }
+
+                [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea, [data-testid="stSidebar"] select {
+                    border-radius: var(--radius-sm) !important;
+                }
+
+                .page-shell a {
+                    color: var(--primary-hover);
+                }
+
+                .page-shell code {
+                    background: #EEF2F6 !important;
+                    color: var(--heading) !important;
+                    border: 1px solid var(--border);
+                    border-radius: 4px;
+                    padding: 0.08rem 0.25rem;
+                    font-size: 0.95em !important;
+                }
+
+
+                .table-toolbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: end;
+                    gap: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+                    padding: 1.15rem 1.25rem;
+                    margin-top: 1.25rem;
+                    border-bottom: 0;
+                }
+
+                .table-title {
+                    font-size: 1.45rem !important;
+                    font-weight: 900 !important;
+                    margin: 0 0 0.2rem 0 !important;
+                    color: var(--heading) !important;
+                }
+
+                .table-caption {
+                    font-size: 1.1rem !important;
+                    color: var(--secondary) !important;
+                    margin: 0 !important;
+                    font-weight: 600;
+                }
+
+                div[data-testid="stVerticalBlock"] > div:has([data-testid="stDataFrame"]) {
+                    margin-top: 0 !important;
+                }
+
+                @media (max-width: 1350px) {
+                    .terminal-body {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .module-grid {
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                    }
+
+                    .workflow-strip {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .workflow-step {
+                        border-right: 0;
+                        border-bottom: 1px solid var(--border);
+                    }
+
+                    .workflow-step:last-child {
+                        border-bottom: 0;
+                    }
+                }
+
+                @media (max-width: 1100px) {
+                    .block-container {
+                        padding: 0.9rem 0.9rem 3rem 0.9rem !important;
+                    }
+
+                    .analysis-prep-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .module-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+
+                /* ---------------------------------------------------------
+                   Final polish pass: sidebar contrast + primary actions
+                   --------------------------------------------------------- */
+
+                /* Sidebar: keep the dark analyst-control-panel direction, but
+                   ensure every label, helper, selected value, and disabled state
+                   remains readable. */
+                [data-testid="stSidebar"] {
+                    background: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] * {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] h1,
+                [data-testid="stSidebar"] h2,
+                [data-testid="stSidebar"] h3,
+                [data-testid="stSidebar"] h4,
+                [data-testid="stSidebar"] label {
+                    color: #F8FAFC !important;
+                }
+
+                [data-testid="stSidebar"] .stCaptionContainer,
+                [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+                [data-testid="stSidebar"] small,
+                [data-testid="stSidebar"] p {
+                    color: #CBD5E1 !important;
+                    font-size: 0.9rem !important;
+                    line-height: 1.45 !important;
+                }
+
+                /* Light form controls inside the dark sidebar. This fixes the
+                   unreadable select/dropdown state such as the same-form value. */
+                [data-testid="stSidebar"] input,
+                [data-testid="stSidebar"] textarea,
+                [data-testid="stSidebar"] select,
+                [data-testid="stSidebar"] [data-baseweb="select"],
+                [data-testid="stSidebar"] [data-baseweb="select"] > div,
+                [data-testid="stSidebar"] [data-baseweb="input"],
+                [data-testid="stSidebar"] [data-baseweb="base-input"],
+                [data-testid="stSidebar"] [data-baseweb="textarea"] {
+                    background: #F8FAFC !important;
+                    border-color: #94A3B8 !important;
+                    color: #0B1220 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] input *,
+                [data-testid="stSidebar"] textarea *,
+                [data-testid="stSidebar"] select *,
+                [data-testid="stSidebar"] [data-baseweb="select"] *,
+                [data-testid="stSidebar"] [data-baseweb="input"] *,
+                [data-testid="stSidebar"] [data-baseweb="base-input"] *,
+                [data-testid="stSidebar"] [data-baseweb="textarea"] * {
+                    color: #0B1220 !important;
+                    opacity: 1 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] input::placeholder,
+                [data-testid="stSidebar"] textarea::placeholder {
+                    color: #475569 !important;
+                    opacity: 1 !important;
+                    -webkit-text-fill-color: #475569 !important;
+                }
+
+                [data-testid="stSidebar"] [aria-disabled="true"],
+                [data-testid="stSidebar"] [disabled],
+                [data-testid="stSidebar"] [aria-disabled="true"] *,
+                [data-testid="stSidebar"] [disabled] * {
+                    opacity: 1 !important;
+                    color: #0B1220 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                }
+
+                [data-testid="stSidebar"] [role="radiogroup"] label,
+                [data-testid="stSidebar"] [data-baseweb="radio"] *,
+                [data-testid="stSidebar"] [data-baseweb="slider"] div,
+                [data-testid="stSidebar"] [data-baseweb="slider"] span {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                    font-size: 0.9rem !important;
+                }
+
+                /* Sidebar recommendation note. */
+                [data-testid="stSidebar"] .callout {
+                    background: #111B2C !important;
+                    border: 1px solid #334155 !important;
+                    border-left: 4px solid #5B7FA6 !important;
+                    color: #E5EDF7 !important;
+                    font-size: 0.9rem !important;
+                    line-height: 1.5 !important;
+                    padding: 1rem 1.05rem !important;
+                    border-radius: var(--radius-md) !important;
+                }
+
+                [data-testid="stSidebar"] .callout,
+                [data-testid="stSidebar"] .callout * {
+                    color: #E5EDF7 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .callout strong {
+                    color: #FFFFFF !important;
+                    font-weight: 900 !important;
+                }
+
+                [data-testid="stSidebar"] .callout code {
+                    display: inline-block;
+                    background: #E5EDF7 !important;
+                    color: #0B1220 !important;
+                    -webkit-text-fill-color: #0B1220 !important;
+                    border: 1px solid #94A3B8 !important;
+                    border-radius: 5px !important;
+                    padding: 0.12rem 0.35rem !important;
+                    font-size: 0.95em !important;
+                    font-weight: 800 !important;
+                    line-height: 1.2 !important;
+                }
+
+                /* Primary analysis actions: keep the button in its strong
+                   institutional navy state at rest. Hover/focus should preserve
+                   the same readable treatment instead of flipping into a bright
+                   Streamlit-blue state. */
+                .stButton > button {
+                    min-height: 46px !important;
+                    padding: 0.78rem 1.25rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    cursor: pointer !important;
+                    
+                }
+
+                .stButton > button *,
+                .stButton > button p,
+                .stButton > button span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    font-weight: 800 !important;
+                }
+
+                .stButton > button:hover,
+                .stButton > button:focus,
+                .stButton > button:active {
+                    background: #0F2742 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    transform: none !important;
+                    cursor: pointer !important;
+                }
+
+                .stButton > button:hover *,
+                .stButton > button:focus *,
+                .stButton > button:active *,
+                .stButton > button:hover p,
+                .stButton > button:focus p,
+                .stButton > button:active p,
+                .stButton > button:hover span,
+                .stButton > button:focus span,
+                .stButton > button:active span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                }
+                /* CSV downloads use the same visible navy button system. */
+                .stDownloadButton > button {
+                    min-height: 44px !important;
+                    padding: 0.65rem 1.1rem !important;
+                    border-radius: 6px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    font-weight: 700 !important;
+                    cursor: pointer !important;
+                }
+
+                .stDownloadButton > button *,
+                .stDownloadButton > button p,
+                .stDownloadButton > button span,
+                .stDownloadButton > button:hover *,
+                .stDownloadButton > button:focus *,
+                .stDownloadButton > button:active * {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                }
+
+                .stDownloadButton > button:hover,
+                .stDownloadButton > button:focus,
+                .stDownloadButton > button:active {
+                    background: #162C46 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.10) !important;
+                }
+
+            
+
+                /* ---------------------------------------------------------
+                   Final button color update: all Streamlit action/export
+                   buttons stay dark institutional blue at rest.
+                   --------------------------------------------------------- */
+                .stButton > button,
+                .stDownloadButton > button,
+                div[data-testid="stFormSubmitButton"] > button {
+                    min-height: 58px !important;
+                    padding: 0.78rem 1.25rem !important;
+                    border-radius: 7px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-family: "Source Sans 3", system-ui, sans-serif !important;
+                    font-size: 0.92rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0 !important;
+                    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.18) !important;
+                    cursor: pointer !important;
+                    opacity: 1 !important;
+                    transition: background 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out !important;
+                }
+
+                .stButton > button *,
+                .stButton > button p,
+                .stButton > button span,
+                .stDownloadButton > button *,
+                .stDownloadButton > button p,
+                .stDownloadButton > button span,
+                div[data-testid="stFormSubmitButton"] > button *,
+                div[data-testid="stFormSubmitButton"] > button p,
+                div[data-testid="stFormSubmitButton"] > button span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-size: 0.92rem !important;
+                    font-weight: 800 !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:hover,
+                .stButton > button:focus,
+                .stButton > button:active,
+                .stDownloadButton > button:hover,
+                .stDownloadButton > button:focus,
+                .stDownloadButton > button:active,
+                div[data-testid="stFormSubmitButton"] > button:hover,
+                div[data-testid="stFormSubmitButton"] > button:focus,
+                div[data-testid="stFormSubmitButton"] > button:active {
+                    background: #0B1F33 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.22) !important;
+                    transform: none !important;
+                    cursor: pointer !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:hover *,
+                .stButton > button:focus *,
+                .stButton > button:active *,
+                .stButton > button:hover p,
+                .stButton > button:focus p,
+                .stButton > button:active p,
+                .stButton > button:hover span,
+                .stButton > button:focus span,
+                .stButton > button:active span,
+                .stDownloadButton > button:hover *,
+                .stDownloadButton > button:focus *,
+                .stDownloadButton > button:active *,
+                .stDownloadButton > button:hover p,
+                .stDownloadButton > button:focus p,
+                .stDownloadButton > button:active p,
+                .stDownloadButton > button:hover span,
+                .stDownloadButton > button:focus span,
+                .stDownloadButton > button:active span,
+                div[data-testid="stFormSubmitButton"] > button:hover *,
+                div[data-testid="stFormSubmitButton"] > button:focus *,
+                div[data-testid="stFormSubmitButton"] > button:active * {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:disabled,
+                .stDownloadButton > button:disabled,
+                div[data-testid="stFormSubmitButton"] > button:disabled,
+                .stButton > button[disabled],
+                .stDownloadButton > button[disabled],
+                div[data-testid="stFormSubmitButton"] > button[disabled] {
+                    background: #294C73 !important;
+                    border-color: #294C73 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 0.72 !important;
+                    cursor: not-allowed !important;
+                }
+                /* Final safe button override: app buttons only, not Streamlit toolbar. */
+                .stButton > button,
+                .stDownloadButton > button,
+                div[data-testid="stFormSubmitButton"] > button {
+                    min-height: 44px !important;
+                    padding: 0.65rem 1.1rem !important;
+                    border-radius: 6px !important;
+                    border: 1px solid #294C73 !important;
+                    background: #0F2742 !important;
+                    background-color: #0F2742 !important;
+                    background-image: none !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+                    font-size: clamp(15px, 0.9vw, 17px) !important;
+                    font-weight: 700 !important;
+                    line-height: 1.15 !important;
+                    text-align: center !important;
+                    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.16) !important;
+                    opacity: 1 !important;
+                    cursor: pointer !important;
+                    transition: background-color 140ms ease-out, border-color 140ms ease-out, box-shadow 140ms ease-out !important;
+                }
+
+                .stButton > button *,
+                .stButton > button p,
+                .stButton > button span,
+                .stDownloadButton > button *,
+                .stDownloadButton > button p,
+                .stDownloadButton > button span,
+                div[data-testid="stFormSubmitButton"] > button *,
+                div[data-testid="stFormSubmitButton"] > button p,
+                div[data-testid="stFormSubmitButton"] > button span {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-weight: 700 !important;
+                    opacity: 1 !important;
+                }
+
+                .stButton > button:hover,
+                .stButton > button:focus,
+                .stButton > button:active,
+                .stDownloadButton > button:hover,
+                .stDownloadButton > button:focus,
+                .stDownloadButton > button:active,
+                div[data-testid="stFormSubmitButton"] > button:hover,
+                div[data-testid="stFormSubmitButton"] > button:focus,
+                div[data-testid="stFormSubmitButton"] > button:active {
+                    background: #162C46 !important;
+                    background-color: #162C46 !important;
+                    border-color: #3B5F84 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18) !important;
+                    transform: none !important;
+                }
+
+                .stButton > button:disabled,
+                .stDownloadButton > button:disabled,
+                div[data-testid="stFormSubmitButton"] > button:disabled,
+                .stButton > button[disabled],
+                .stDownloadButton > button[disabled],
+                div[data-testid="stFormSubmitButton"] > button[disabled] {
+                    background: #294C73 !important;
+                    border-color: #294C73 !important;
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    opacity: 0.72 !important;
+                    cursor: not-allowed !important;
+                }
+
+>>>>>>> 1a0e03c (Restore dashboard layout with deployment-safe CSS)
             </style>
             """,
             unsafe_allow_html=True,
