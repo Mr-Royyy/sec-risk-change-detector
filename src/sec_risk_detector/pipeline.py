@@ -12,20 +12,23 @@ from pathlib import Path
 import pandas as pd
 
 from sec_risk_detector.config import ProjectConfig
+from sec_risk_detector.event_study import EventStudyAnalyzer
 from sec_risk_detector.models import ExtractedSection
 from sec_risk_detector.nlp_features import RiskChangeAnalyzer
 from sec_risk_detector.sec_client import SecClient
 from sec_risk_detector.section_extractor import RiskSectionExtractor
-
+from sec_risk_detector.research_summary import ResearchSummaryAnalyzer
 
 class FilingIngestionPipeline:
-    """Pipeline for ticker lookup, filing metadata, risk extraction, and scoring."""
+    """Pipeline for ticker lookup, filing metadata, risk extraction, scoring, and event studies."""
 
     def __init__(
         self,
         client: SecClient | None = None,
         extractor: RiskSectionExtractor | None = None,
         analyzer: RiskChangeAnalyzer | None = None,
+        event_analyzer: EventStudyAnalyzer | None = None,
+        summary_analyzer: ResearchSummaryAnalyzer | None = None,
     ) -> None:
         """Initialize pipeline dependencies."""
 
@@ -33,6 +36,8 @@ class FilingIngestionPipeline:
         self.client = client or SecClient(config)
         self.extractor = extractor or RiskSectionExtractor()
         self.analyzer = analyzer or RiskChangeAnalyzer()
+        self.event_analyzer = event_analyzer or EventStudyAnalyzer()
+        self.summary_analyzer = summary_analyzer or ResearchSummaryAnalyzer()
 
     def get_filing_metadata(
         self,
@@ -81,17 +86,7 @@ class FilingIngestionPipeline:
         limit: int = 6,
         compare_mode: str = "previous",
     ) -> pd.DataFrame:
-        """Extract risk sections and compute risk-change scores between filings.
-
-        Args:
-            ticker: Company ticker symbol.
-            forms: SEC form types to include.
-            limit: Maximum number of filings to fetch.
-            compare_mode: Either "previous" or "same-form".
-
-        Returns:
-            A DataFrame of risk-change scores.
-        """
+        """Extract risk sections and compute risk-change scores between filings."""
 
         sections_df = self.extract_risk_sections_df(
             ticker=ticker,
@@ -104,6 +99,70 @@ class FilingIngestionPipeline:
             compare_mode=compare_mode,
         )
 
+    def build_event_study_df(
+        self,
+        ticker: str,
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+    ) -> pd.DataFrame:
+        """Build risk-change scores and add post-filing market outcomes."""
+
+        risk_scores_df = self.build_risk_change_scores_df(
+            ticker=ticker,
+            forms=forms,
+            limit=limit,
+            compare_mode=compare_mode,
+        )
+
+        return self.event_analyzer.analyze(
+            risk_scores_df,
+            benchmark_ticker=benchmark_ticker,
+        )
+
+
+    def build_research_summary_df(
+        self,
+        ticker: str,
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+    ) -> pd.DataFrame:
+        """Build event-study results and summarize outcomes by risk bucket."""
+
+        event_study_df = self.build_event_study_df(
+            ticker=ticker,
+            forms=forms,
+            limit=limit,
+            compare_mode=compare_mode,
+            benchmark_ticker=benchmark_ticker,
+        )
+
+        return self.summary_analyzer.summarize(event_study_df)
+
+    def build_top_risk_events_df(
+        self,
+        ticker: str,
+        forms: tuple[str, ...] = ("10-K", "10-Q"),
+        limit: int = 8,
+        compare_mode: str = "same-form",
+        benchmark_ticker: str = "^GSPC",
+        n: int = 10,
+    ) -> pd.DataFrame:
+        """Build event-study results and return the highest risk-change events."""
+
+        event_study_df = self.build_event_study_df(
+            ticker=ticker,
+            forms=forms,
+            limit=limit,
+            compare_mode=compare_mode,
+            benchmark_ticker=benchmark_ticker,
+        )
+
+        return self.summary_analyzer.top_risk_events(event_study_df, n=n)
+    
     @staticmethod
     def save_dataframe(df: pd.DataFrame, output_path: str | Path) -> Path:
         """Save a DataFrame to CSV, creating parent directories as needed."""

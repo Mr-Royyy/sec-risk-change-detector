@@ -44,10 +44,41 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--event-study",
+        action="store_true",
+        help="Compute risk-change scores and post-filing market reaction metrics.",
+    )
+
+    parser.add_argument(
+        "--summary",
+        action="store_true",
+        help="Summarize event-study results by risk-score bucket.",
+    )
+
+    parser.add_argument(
+        "--top-events",
+        action="store_true",
+        help="Show highest risk-change filing events.",
+    )
+
+    parser.add_argument(
         "--compare-mode",
         choices=["previous", "same-form"],
         default="previous",
         help="Risk-score comparison mode. Use 'same-form' to avoid comparing 10-Ks to 10-Qs.",
+    )
+
+    parser.add_argument(
+        "--benchmark",
+        default="^GSPC",
+        help="Benchmark ticker for abnormal returns. Default is ^GSPC.",
+    )
+
+    parser.add_argument(
+        "--top-n",
+        type=int,
+        default=10,
+        help="Number of top risk events to show when using --top-events.",
     )
 
     parser.add_argument(
@@ -59,6 +90,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     return parser
 
+
 def main() -> None:
     """Run the CLI."""
 
@@ -68,7 +100,32 @@ def main() -> None:
     pipeline = FilingIngestionPipeline()
     forms = tuple(args.forms)
 
-    if args.score_risk:
+    if args.summary:
+        df = pipeline.build_research_summary_df(
+            args.ticker,
+            forms=forms,
+            limit=args.limit,
+            compare_mode=args.compare_mode,
+            benchmark_ticker=args.benchmark,
+        )
+    elif args.top_events:
+        df = pipeline.build_top_risk_events_df(
+            args.ticker,
+            forms=forms,
+            limit=args.limit,
+            compare_mode=args.compare_mode,
+            benchmark_ticker=args.benchmark,
+            n=args.top_n,
+        )
+    elif args.event_study:
+        df = pipeline.build_event_study_df(
+            args.ticker,
+            forms=forms,
+            limit=args.limit,
+            compare_mode=args.compare_mode,
+            benchmark_ticker=args.benchmark,
+        )
+    elif args.score_risk:
         df = pipeline.build_risk_change_scores_df(
             args.ticker,
             forms=forms,
