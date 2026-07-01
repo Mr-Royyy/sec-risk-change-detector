@@ -1202,149 +1202,364 @@ class RiskDashboardApp:
                     cursor: not-allowed !important;
                 }
 
-                /* ---------------------------------------------------------
-                   Button visibility fix: app buttons only.
-                   This is intentionally appended last so it wins over Streamlit
-                   defaults and earlier local button rules without touching the
-                   Streamlit Cloud toolbar/header controls.
-                   --------------------------------------------------------- */
+            
 
-                .stApp [data-testid="stButton"] button,
-                .stApp [data-testid="stDownloadButton"] button,
-                .stApp [data-testid="stFormSubmitButton"] button,
-                .stApp .stButton button,
-                .stApp .stDownloadButton button {
+                /* =========================================================
+                   Focused final polish: app buttons + calmer sidebar only
+                   ========================================================= */
+
+                /* Calmer left control panel. Keep the dark finance terminal
+                   direction, but reduce the harsh pure-black feel. */
+                :root {
+                    --surface-sidebar: #111827;
+                    --surface-sidebar-soft: #1B2638;
+                    --sidebar-text: #E5EAF2;
+                    --sidebar-heading: #F8FAFC;
+                    --sidebar-muted: #AAB6C5;
+                    --sidebar-border: rgba(148, 163, 184, 0.25);
+                }
+
+                section[data-testid="stSidebar"] {
+                    width: var(--sidebar) !important;
+                    min-width: var(--sidebar) !important;
+                    background: #111827 !important;
+                    border-right: 1px solid rgba(148, 163, 184, 0.22) !important;
+                    box-shadow: none !important;
+                }
+
+                section[data-testid="stSidebar"] > div {
+                    width: var(--sidebar) !important;
+                    min-width: var(--sidebar) !important;
+                    padding-left: 1.05rem !important;
+                    padding-right: 1.05rem !important;
+                    background: #111827 !important;
+                }
+
+                [data-testid="stSidebar"] h1,
+                [data-testid="stSidebar"] h2,
+                [data-testid="stSidebar"] h3,
+                [data-testid="stSidebar"] h4 {
+                    color: #F8FAFC !important;
+                    font-size: 1.35rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: -0.01em !important;
+                }
+
+                [data-testid="stSidebar"] label,
+                [data-testid="stSidebar"] [role="radiogroup"] label,
+                [data-testid="stSidebar"] [data-baseweb="radio"] * {
+                    color: #E5EAF2 !important;
+                    -webkit-text-fill-color: #E5EAF2 !important;
+                    font-size: 0.94rem !important;
+                    font-weight: 650 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .stCaptionContainer,
+                [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+                [data-testid="stSidebar"] small,
+                [data-testid="stSidebar"] p {
+                    color: #AAB6C5 !important;
+                    -webkit-text-fill-color: #AAB6C5 !important;
+                    font-size: 0.9rem !important;
+                    line-height: 1.45 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .stTextInput,
+                [data-testid="stSidebar"] .stTextArea,
+                [data-testid="stSidebar"] .stSelectbox,
+                [data-testid="stSidebar"] .stRadio,
+                [data-testid="stSidebar"] .stSlider {
+                    margin-bottom: 1rem !important;
+                    padding-bottom: 0.9rem !important;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+                }
+
+                [data-testid="stSidebar"] input,
+                [data-testid="stSidebar"] textarea,
+                [data-testid="stSidebar"] select,
+                [data-testid="stSidebar"] [data-baseweb="select"],
+                [data-testid="stSidebar"] [data-baseweb="select"] > div,
+                [data-testid="stSidebar"] [data-baseweb="input"],
+                [data-testid="stSidebar"] [data-baseweb="base-input"],
+                [data-testid="stSidebar"] [data-baseweb="textarea"] {
+                    min-height: 42px !important;
+                    background: #F8FAFC !important;
+                    border: 1px solid #CBD5E1 !important;
+                    border-radius: 6px !important;
+                    color: #0F172A !important;
+                    -webkit-text-fill-color: #0F172A !important;
+                    font-size: 0.94rem !important;
+                    font-weight: 600 !important;
+                    opacity: 1 !important;
+                    box-shadow: none !important;
+                }
+
+                [data-testid="stSidebar"] input *,
+                [data-testid="stSidebar"] textarea *,
+                [data-testid="stSidebar"] select *,
+                [data-testid="stSidebar"] [data-baseweb="select"] *,
+                [data-testid="stSidebar"] [data-baseweb="input"] *,
+                [data-testid="stSidebar"] [data-baseweb="base-input"] *,
+                [data-testid="stSidebar"] [data-baseweb="textarea"] * {
+                    color: #0F172A !important;
+                    -webkit-text-fill-color: #0F172A !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] input::placeholder,
+                [data-testid="stSidebar"] textarea::placeholder {
+                    color: #64748B !important;
+                    -webkit-text-fill-color: #64748B !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] [data-baseweb="slider"] div,
+                [data-testid="stSidebar"] [data-baseweb="slider"] span {
+                    color: #CBD5E1 !important;
+                    -webkit-text-fill-color: #CBD5E1 !important;
+                    font-size: 0.9rem !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .callout {
+                    background: #1B2638 !important;
+                    border: 1px solid rgba(148, 163, 184, 0.28) !important;
+                    border-left: 3px solid #5B7FA6 !important;
+                    border-radius: 6px !important;
+                    color: #E5EAF2 !important;
+                    -webkit-text-fill-color: #E5EAF2 !important;
+                    font-size: 0.92rem !important;
+                    line-height: 1.45 !important;
+                    padding: 0.85rem 0.9rem !important;
+                    box-shadow: none !important;
+                }
+
+                [data-testid="stSidebar"] .callout,
+                [data-testid="stSidebar"] .callout * {
+                    color: #E5EAF2 !important;
+                    -webkit-text-fill-color: #E5EAF2 !important;
+                    opacity: 1 !important;
+                }
+
+                [data-testid="stSidebar"] .callout strong {
+                    color: #FFFFFF !important;
+                    -webkit-text-fill-color: #FFFFFF !important;
+                    font-weight: 800 !important;
+                }
+
+                [data-testid="stSidebar"] .callout code {
+                    display: inline-block !important;
+                    background: #E5EAF2 !important;
+                    color: #0F172A !important;
+                    -webkit-text-fill-color: #0F172A !important;
+                    border: 1px solid #CBD5E1 !important;
+                    border-radius: 4px !important;
+                    padding: 0.08rem 0.32rem !important;
+                    font-size: 0.9em !important;
+                    font-weight: 800 !important;
+                    line-height: 1.2 !important;
+                }
+
+                /* Force every app action/export button to be filled dark navy
+                   by default. These selectors target app buttons only and avoid
+                   broad button rules that would affect Streamlit Cloud chrome. */
+                .stButton > button,
+                .stButton button,
+                .stDownloadButton > button,
+                .stDownloadButton button,
+                div[data-testid="stButton"] > button,
+                div[data-testid="stButton"] button,
+                div[data-testid="stDownloadButton"] > button,
+                div[data-testid="stDownloadButton"] button,
+                div[data-testid="stFormSubmitButton"] > button,
+                div[data-testid="stFormSubmitButton"] button,
+                div[data-testid="stButton"] button[data-testid="baseButton-secondary"],
+                div[data-testid="stButton"] button[data-testid="baseButton-primary"],
+                div[data-testid="stDownloadButton"] button[data-testid="baseButton-secondary"],
+                div[data-testid="stDownloadButton"] button[data-testid="baseButton-primary"],
+                div[data-testid="stFormSubmitButton"] button[data-testid="baseButton-secondaryFormSubmit"],
+                div[data-testid="stFormSubmitButton"] button[data-testid="baseButton-primaryFormSubmit"] {
                     appearance: none !important;
                     -webkit-appearance: none !important;
-                    min-height: 46px !important;
-                    padding: 0.65rem 1.1rem !important;
-                    border-radius: 6px !important;
-                    border: 1px solid #294C73 !important;
                     background: #0F2742 !important;
                     background-color: #0F2742 !important;
                     background-image: none !important;
                     color: #FFFFFF !important;
                     -webkit-text-fill-color: #FFFFFF !important;
+                    border: 1px solid #294C73 !important;
+                    border-radius: 6px !important;
                     font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-                    font-size: clamp(16px, 0.9vw, 18px) !important;
-                    font-weight: 700 !important;
+                    font-size: 16px !important;
+                    font-weight: 600 !important;
                     line-height: 1.15 !important;
-                    text-align: center !important;
-                    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18) !important;
+                    min-height: 44px !important;
+                    padding: 0.7rem 1.15rem !important;
+                    box-shadow: 0 2px 5px rgba(15, 39, 66, 0.18) !important;
                     opacity: 1 !important;
                     cursor: pointer !important;
-                    transition:
-                        background-color 140ms ease-out,
-                        border-color 140ms ease-out,
-                        box-shadow 140ms ease-out !important;
+                    text-align: center !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    transition: background-color 140ms ease-out, border-color 140ms ease-out, box-shadow 140ms ease-out !important;
                 }
 
-                .stApp [data-testid="stButton"] button *,
-                .stApp [data-testid="stButton"] button p,
-                .stApp [data-testid="stButton"] button span,
-                .stApp [data-testid="stDownloadButton"] button *,
-                .stApp [data-testid="stDownloadButton"] button p,
-                .stApp [data-testid="stDownloadButton"] button span,
-                .stApp [data-testid="stFormSubmitButton"] button *,
-                .stApp [data-testid="stFormSubmitButton"] button p,
-                .stApp [data-testid="stFormSubmitButton"] button span,
-                .stApp .stButton button *,
-                .stApp .stButton button p,
-                .stApp .stButton button span,
-                .stApp .stDownloadButton button *,
-                .stApp .stDownloadButton button p,
-                .stApp .stDownloadButton button span {
+                .stButton > button *,
+                .stButton button *,
+                .stButton > button p,
+                .stButton button p,
+                .stButton > button span,
+                .stButton button span,
+                .stDownloadButton > button *,
+                .stDownloadButton button *,
+                .stDownloadButton > button p,
+                .stDownloadButton button p,
+                .stDownloadButton > button span,
+                .stDownloadButton button span,
+                div[data-testid="stButton"] button *,
+                div[data-testid="stButton"] button p,
+                div[data-testid="stButton"] button span,
+                div[data-testid="stDownloadButton"] button *,
+                div[data-testid="stDownloadButton"] button p,
+                div[data-testid="stDownloadButton"] button span,
+                div[data-testid="stFormSubmitButton"] button *,
+                div[data-testid="stFormSubmitButton"] button p,
+                div[data-testid="stFormSubmitButton"] button span {
                     color: #FFFFFF !important;
                     -webkit-text-fill-color: #FFFFFF !important;
-                    font-size: inherit !important;
-                    font-weight: 700 !important;
+                    font-size: 16px !important;
+                    font-weight: 600 !important;
+                    line-height: 1.15 !important;
                     opacity: 1 !important;
                 }
 
-                .stApp [data-testid="stButton"] button:hover,
-                .stApp [data-testid="stButton"] button:focus,
-                .stApp [data-testid="stButton"] button:active,
-                .stApp [data-testid="stDownloadButton"] button:hover,
-                .stApp [data-testid="stDownloadButton"] button:focus,
-                .stApp [data-testid="stDownloadButton"] button:active,
-                .stApp [data-testid="stFormSubmitButton"] button:hover,
-                .stApp [data-testid="stFormSubmitButton"] button:focus,
-                .stApp [data-testid="stFormSubmitButton"] button:active,
-                .stApp .stButton button:hover,
-                .stApp .stButton button:focus,
-                .stApp .stButton button:active,
-                .stApp .stDownloadButton button:hover,
-                .stApp .stDownloadButton button:focus,
-                .stApp .stDownloadButton button:active {
+                .stButton > button:hover,
+                .stButton button:hover,
+                .stDownloadButton > button:hover,
+                .stDownloadButton button:hover,
+                div[data-testid="stButton"] > button:hover,
+                div[data-testid="stButton"] button:hover,
+                div[data-testid="stDownloadButton"] > button:hover,
+                div[data-testid="stDownloadButton"] button:hover,
+                div[data-testid="stFormSubmitButton"] > button:hover,
+                div[data-testid="stFormSubmitButton"] button:hover,
+                div[data-testid="stButton"] button[data-testid="baseButton-secondary"]:hover,
+                div[data-testid="stButton"] button[data-testid="baseButton-primary"]:hover,
+                div[data-testid="stDownloadButton"] button[data-testid="baseButton-secondary"]:hover,
+                div[data-testid="stDownloadButton"] button[data-testid="baseButton-primary"]:hover,
+                div[data-testid="stFormSubmitButton"] button[data-testid="baseButton-secondaryFormSubmit"]:hover,
+                div[data-testid="stFormSubmitButton"] button[data-testid="baseButton-primaryFormSubmit"]:hover,
+                .stButton > button:focus,
+                .stButton button:focus,
+                .stDownloadButton > button:focus,
+                .stDownloadButton button:focus,
+                div[data-testid="stButton"] button:focus,
+                div[data-testid="stDownloadButton"] button:focus,
+                div[data-testid="stFormSubmitButton"] button:focus,
+                .stButton > button:active,
+                .stButton button:active,
+                .stDownloadButton > button:active,
+                .stDownloadButton button:active,
+                div[data-testid="stButton"] button:active,
+                div[data-testid="stDownloadButton"] button:active,
+                div[data-testid="stFormSubmitButton"] button:active {
                     background: #162C46 !important;
                     background-color: #162C46 !important;
                     background-image: none !important;
-                    border-color: #3B5F84 !important;
                     color: #FFFFFF !important;
                     -webkit-text-fill-color: #FFFFFF !important;
-                    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.22) !important;
+                    border: 1px solid #3B5F84 !important;
+                    box-shadow: 0 3px 7px rgba(15, 39, 66, 0.24) !important;
                     opacity: 1 !important;
                     transform: none !important;
                     cursor: pointer !important;
                 }
 
-                .stApp [data-testid="stButton"] button:focus,
-                .stApp [data-testid="stDownloadButton"] button:focus,
-                .stApp [data-testid="stFormSubmitButton"] button:focus,
-                .stApp .stButton button:focus,
-                .stApp .stDownloadButton button:focus {
-                    outline: 2px solid rgba(59, 95, 132, 0.55) !important;
-                    outline-offset: 2px !important;
-                }
-
-                .stApp [data-testid="stButton"] button:hover *,
-                .stApp [data-testid="stButton"] button:focus *,
-                .stApp [data-testid="stButton"] button:active *,
-                .stApp [data-testid="stDownloadButton"] button:hover *,
-                .stApp [data-testid="stDownloadButton"] button:focus *,
-                .stApp [data-testid="stDownloadButton"] button:active *,
-                .stApp [data-testid="stFormSubmitButton"] button:hover *,
-                .stApp [data-testid="stFormSubmitButton"] button:focus *,
-                .stApp [data-testid="stFormSubmitButton"] button:active *,
-                .stApp .stButton button:hover *,
-                .stApp .stButton button:focus *,
-                .stApp .stButton button:active *,
-                .stApp .stDownloadButton button:hover *,
-                .stApp .stDownloadButton button:focus *,
-                .stApp .stDownloadButton button:active * {
+                .stButton > button:hover *,
+                .stButton button:hover *,
+                .stButton > button:focus *,
+                .stButton button:focus *,
+                .stButton > button:active *,
+                .stButton button:active *,
+                .stDownloadButton > button:hover *,
+                .stDownloadButton button:hover *,
+                .stDownloadButton > button:focus *,
+                .stDownloadButton button:focus *,
+                .stDownloadButton > button:active *,
+                .stDownloadButton button:active *,
+                div[data-testid="stButton"] button:hover *,
+                div[data-testid="stButton"] button:focus *,
+                div[data-testid="stButton"] button:active *,
+                div[data-testid="stDownloadButton"] button:hover *,
+                div[data-testid="stDownloadButton"] button:focus *,
+                div[data-testid="stDownloadButton"] button:active *,
+                div[data-testid="stFormSubmitButton"] button:hover *,
+                div[data-testid="stFormSubmitButton"] button:focus *,
+                div[data-testid="stFormSubmitButton"] button:active * {
                     color: #FFFFFF !important;
                     -webkit-text-fill-color: #FFFFFF !important;
                     opacity: 1 !important;
                 }
 
-                .stApp [data-testid="stButton"] button:disabled,
-                .stApp [data-testid="stDownloadButton"] button:disabled,
-                .stApp [data-testid="stFormSubmitButton"] button:disabled,
-                .stApp .stButton button:disabled,
-                .stApp .stDownloadButton button:disabled,
-                .stApp [data-testid="stButton"] button[disabled],
-                .stApp [data-testid="stDownloadButton"] button[disabled],
-                .stApp [data-testid="stFormSubmitButton"] button[disabled],
-                .stApp .stButton button[disabled],
-                .stApp .stDownloadButton button[disabled] {
-                    background: #294C73 !important;
-                    background-color: #294C73 !important;
+                .stButton > button:disabled,
+                .stButton button:disabled,
+                .stDownloadButton > button:disabled,
+                .stDownloadButton button:disabled,
+                div[data-testid="stButton"] button:disabled,
+                div[data-testid="stDownloadButton"] button:disabled,
+                div[data-testid="stFormSubmitButton"] button:disabled,
+                .stButton > button[disabled],
+                .stButton button[disabled],
+                .stDownloadButton > button[disabled],
+                .stDownloadButton button[disabled],
+                div[data-testid="stButton"] button[disabled],
+                div[data-testid="stDownloadButton"] button[disabled],
+                div[data-testid="stFormSubmitButton"] button[disabled] {
+                    background: #1E334D !important;
+                    background-color: #1E334D !important;
                     background-image: none !important;
-                    border-color: #294C73 !important;
-                    color: #FFFFFF !important;
-                    -webkit-text-fill-color: #FFFFFF !important;
-                    opacity: 0.72 !important;
+                    color: #DCE6F2 !important;
+                    -webkit-text-fill-color: #DCE6F2 !important;
+                    border: 1px solid #34495F !important;
+                    opacity: 0.85 !important;
                     cursor: not-allowed !important;
+                    box-shadow: none !important;
                 }
 
-                header [data-testid="stToolbar"] button,
-                header [data-testid="stDecoration"] button,
+                .stButton > button:disabled *,
+                .stButton button:disabled *,
+                .stDownloadButton > button:disabled *,
+                .stDownloadButton button:disabled *,
+                div[data-testid="stButton"] button:disabled *,
+                div[data-testid="stDownloadButton"] button:disabled *,
+                div[data-testid="stFormSubmitButton"] button:disabled *,
+                .stButton > button[disabled] *,
+                .stButton button[disabled] *,
+                .stDownloadButton > button[disabled] *,
+                .stDownloadButton button[disabled] *,
+                div[data-testid="stButton"] button[disabled] *,
+                div[data-testid="stDownloadButton"] button[disabled] *,
+                div[data-testid="stFormSubmitButton"] button[disabled] * {
+                    color: #DCE6F2 !important;
+                    -webkit-text-fill-color: #DCE6F2 !important;
+                    opacity: 1 !important;
+                }
+
+                /* Explicitly leave Streamlit Cloud chrome alone. */
+                header button,
+                header button *,
                 [data-testid="stToolbar"] button,
-                [data-testid="stDecoration"] button {
-                    all: revert;
+                [data-testid="stToolbar"] button *,
+                [data-testid="stDecoration"] button,
+                [data-testid="stDecoration"] button *,
+                [data-testid="stStatusWidget"] button,
+                [data-testid="stStatusWidget"] button * {
+                    all: revert !important;
                 }
-
-            </style>
+</style>
             """,
             unsafe_allow_html=True,
         )
