@@ -1,15 +1,17 @@
-"""Streamlit dashboard for the SEC Risk Change Detector.
-
-This file only refactors the frontend experience. The backend pipeline and
-analysis methods are unchanged.
-"""
-
 from __future__ import annotations
 
+import sys
 from html import escape
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SRC_PATH = PROJECT_ROOT / "src"
+
+if str(SRC_PATH) not in sys.path:
+    sys.path.insert(0, str(SRC_PATH))
 
 from sec_risk_detector.pipeline import FilingIngestionPipeline
 
