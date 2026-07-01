@@ -232,11 +232,7 @@ class RiskDashboardApp:
             st.warning("Enter at least one ticker.")
             return
 
-        button_label = (
-            "Run Batch Event Study"
-            if len(tickers) > 1
-            else "Run Event Study"
-        )
+        button_label = "Run Batch Event Study" if len(tickers) > 1 else "Run Event Study"
 
         if st.button(button_label, key="event_button"):
             with st.spinner("Running event study..."):
@@ -272,6 +268,7 @@ class RiskDashboardApp:
 
             if numeric_columns:
                 st.write("Key event-study fields:")
+
                 display_columns = [
                     column
                     for column in [
@@ -282,6 +279,7 @@ class RiskDashboardApp:
                     ]
                     if column in df.columns
                 ]
+
                 st.dataframe(df[display_columns], use_container_width=True)
 
     def _render_summary_tab(self, controls: dict[str, object]) -> None:
@@ -403,6 +401,7 @@ class RiskDashboardApp:
             for token in normalized.split(" ")
             if token.strip()
         ]
+
         return list(dict.fromkeys(tickers))
 
     @staticmethod

@@ -9,3 +9,4 @@ build/
 data/raw/cache/
 data/interim/*.csv
 data/processed/*.csv
+.streamlit/secrets.toml
